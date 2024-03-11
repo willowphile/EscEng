@@ -1078,14 +1078,14 @@ section {
 }
 
 /*--------------------------------------------------------------
-# dynamicIds
+# noIds
 --------------------------------------------------------------*/
-.dynamicIds {
+.noIds {
   background: #fff;
   padding: 60px 0;
 }
 
-.dynamicIds .member {
+.noIds .member {
   margin-bottom: 20px;
   overflow: hidden;
   text-align: center;
@@ -1094,12 +1094,12 @@ section {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-.dynamicIds .member .member-img {
+.noIds .member .member-img {
   position: relative;
   overflow: hidden;
 }
 
-.dynamicIds .member .social {
+.noIds .member .social {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1113,7 +1113,7 @@ section {
   justify-content: center;
 }
 
-.dynamicIds .member .social a {
+.noIds .member .social a {
   transition: color 0.3s;
   color: #493c3e;
   margin: 0 10px;
@@ -1122,46 +1122,59 @@ section {
   justify-content: center;
 }
 
-.dynamicIds .member .social a i {
+.noIds .member .social a i {
   line-height: 0;
 }
 
-.dynamicIds .member .social a:hover {
+.noIds .member .social a:hover {
   color: #e43c5c;
 }
 
-.dynamicIds .member .social i {
+.noIds .member .social i {
   font-size: 18px;
   margin: 0 2px;
 }
 
-.dynamicIds .member .member-info {
+.noIds .member .member-info {
   padding: 25px 15px;
 }
 
-.dynamicIds .member .member-info h4 {
+.noIds .member .member-info h4 {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 18px;
   color: #493c3e;
 }
 
-.dynamicIds .member .member-info span {
+.noIds .member .member-info span {
   display: block;
   font-size: 13px;
   font-weight: 400;
   color: #aaaaaa;
 }
 
-.dynamicIds .member .member-info p {
+.noIds .member .member-info p {
   font-style: italic;
   font-size: 14px;
   line-height: 26px;
   color: #777777;
 }
 
-.dynamicIds .member:hover .social {
+.noIds .member:hover .social {
   opacity: 1;
+}
+
+.noIds button {
+  background: #e43c5c;
+  border: 0;
+  padding: 10px 28px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.noIds button:hover {
+  background: #d01d3f;
 }
 
 /*--------------------------------------------------------------

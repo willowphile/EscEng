@@ -56,7 +56,7 @@
             <a href="#clickEvents"><span>Features</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#wackyCSS">Wacky CSS</a></li>
-              <li><a href="#dynamicIds">dynamicIds</a></li>
+              <li><a href="#noIds">Tricky Tagging</a></li>
               <li><a href="#clickEventProps">clickEventProps</a></li>
             </ul>
           </li>
@@ -431,87 +431,92 @@
       </div>
     </section>
     <!-- End wackyCSS Section -->
-    <!-- ======= dynamicIds Section ======= -->
-    <section id="dynamicIds" class="dynamicIds">
+    <!-- ======= noIds Section ======= -->
+    <section id="noIds" class="noIds">
       <div class="container">
         <div class="section-title">
-          <h2>Dynamic IDs</h2>
-          <h3>How can you tag IDs <span>constantly in flux?</span></h3>
-          <p>make better pictures and do some scripting to make ids change. Maybe nth children here?</p>
+          <h2>No IDs</h2>
+          <h3>How can you tag <span>identical elements?</span></h3>
+          <p>Come up with a way to tag these creepy siblings.</p>
         </div>
         <div class="row">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4>We're all the same</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
               </div>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
+                <h4>except our text.</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
               </div>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
+                <h4>How on earth</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
               </div>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
+                <h4>can you tag us?</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
               </div>
             </div>
           </div>
+          <script>
+            function buttonChange(element, color) {
+              element.style.background = color;
+            }
+          </script>
         </div>
       </div>
     </section>
-    <!-- End dynamicIds Section -->
+    <!-- End noIds Section -->
     <!-- ======= clickEventProps Section ======= -->
     <section id="clickEventProps" class="clickEventProps">
       <div class="container">
@@ -582,22 +587,28 @@
           <h2>trackEvents</h2>
           <h3>What if there are <span>no clicks?!</span></h3>
           <p>Put some dropdowns with change events maybe?</p>
+          <p>How tf can i remove click events from those switches?!?</p>
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6">
             <div class="box">
               <h3>Free</h3>
               <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                  onclick="myFunction()">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Feature A</label>
               </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Feature B</label>
+              </div>
+              <script>
+                function myFunction() {
+                  const node = document.getElementById("flexSwitchCheckDefault");
+                  node.replaceWith(node.cloneNode(true));
+                }
+              </script>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
