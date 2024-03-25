@@ -587,23 +587,32 @@
         <div class="section-title">
           <h2>trackEvents</h2>
           <h3>What if there are <span>no clicks?!</span></h3>
-          <p>Put some dropdowns with change events maybe?</p>
-          <p>How tf can i remove click events from those switches?!?</p>
+          <p>Do these dropdowns send click or only change events?</p>
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6">
             <div class="box">
-              <h3>Free</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <div class="form-check form-switch">
+              <h3>I want to know what option the user has selected below:</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               -->
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>Plz choose an option, thx</option>
+                <option value="1">No</option>
+                <option value="2">Nuh-uh</option>
+                <option value="3">meh, sure</option>
+              </select>
+              
+              
+              <!-- <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
                   onclick="myFunction()">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Feature A</label>
+
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
                 <label class="form-check-label" for="flexSwitchCheckChecked">Feature B</label>
-              </div>
+              </div> -->
               <script>
                 function myFunction() {
                   const node = document.getElementById("flexSwitchCheckDefault");
@@ -615,15 +624,15 @@
           <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
             <div class="box recommended">
               <span class="recommended-badge">Recommended</span>
-              <h3>Business</h3>
-              <h4><sup>$</sup>19<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
+              <h3>Here's another dropdown</h3>
+              <h4><sup>it's very</sup>important<span> to me</span></h4>
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>This is the most important one</option>
+                <option value="1">No this one!</option>
+                <option value="2">This is the more important one</option>
+                <option value="3">How can you pick those others</option>
+                <option value="4">When I'm right here</option>
+              </select>
               <div class="btn-wrap">
                 <a href="#" class="btn-buy">Buy Now</a>
               </div>
@@ -631,19 +640,17 @@
           </div>
           <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
             <div class="box">
-              <h3>Developer</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
+              <h3>Here's another; do you like:</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               -->
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>Flowers</option>
+                <option value="1">Fungi</option>
+                <option value="2">Metal</option>
+                <option value="3">Lace</option>
+                <option value="3">Rocks</option>
+              </select>
+              
           </div>
         </div>
       </div>
