@@ -27,6 +27,29 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script>
+        (function (apiKey) {
+            (function (p, e, n, d, o) {
+                var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
+                v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
+                    o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
+                })(v[w]);
+                y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+            })(window, document, 'script', 'pendo');
+
+            pendo.initialize({
+                //by adding the events section below, it clears any exisitng visitorId
+                //that the agent may be holding onto from a previous page
+                events: {
+                    ready: function () {
+                        console.log('calling clearSession');
+                        pendo.clearSession();
+                    }
+                }
+            });
+        })('1a320afd-6992-47f3-4486-571abccd1b9c');
+    </script>
 </head>
 
 <body>
@@ -94,7 +117,7 @@
                                 <p class="mb-5 fs-5">This is a multi-page site containing a LOT of random things.</p>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5"
-                                        href="#">Discover Now</a>
+                                        href="#login">Discover Now</a>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +133,7 @@
                                     the navbar at the top.</p>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5"
-                                        href="#">Discover Now</a>
+                                        href="#login">Discover Now</a>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +150,7 @@
                                     implemented, reach out to EE!</p>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5"
-                                        href="#">Discover Now</a>
+                                        href="#login">Discover Now</a>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +169,135 @@
         <!-- Carousel End -->
     </div>
 
+    <!-- Login Start -->
+    <div class="container-fluid destination py-5">
+        <div class="container py-5" id="login">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Identity</h5>
+                <h1 class="mb-0">Visitor Identification</h1>
+                <p class="mb-0">Pendo has been initialized, but with clearSession.<br>So right now, the government is
+                    not tracking you.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div
+                                class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                <div class="service-content">
+                                    <h5 class="mb-4">Identify yourself!</h5>
+                                    <p>
+                                        By "logging in" here, you will:
+                                    </p>
+                                    <ul>
+                                        <li><i class="ri-check-double-line"></i> Trigger a pendo.identify() event with
+                                            the entered info.
+                                        </li>
+                                        <li><i class="ri-check-double-line"></i> Set your visitor and account IDs in
+                                            local storage for later reference.
+                                        </li>
+                                        <hr>
+                                        <p><i class="ri-check-double-line"></i> You are currently identified as
+                                            visitor: </p>
+                                        <h5 class="mb-4" id="currentVisitorId"></h5>
+                                    </ul>
+                                    <script>
+                                        setTimeout(
+                                            function () {
+                                                var pendoVisitorId = pendo.getVisitorId();
+                                                document.getElementById("currentVisitorId").innerText = pendoVisitorId;
+                                            },
+                                            1000
+                                        ); 
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div
+                                class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                <div class="service-content" style="width:97%">
+                                    <h5 class="mb-4">Tell Us Everything</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control bg-white" id="visitorField"
+                                                        placeholder="Visitor ID">
+                                                    <label for="name">Visitor ID</label>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control bg-white" id="accountField"
+                                                        placeholder="Account ID">
+                                                    <label for="email">Account ID</label>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control bg-white" id="randomField"
+                                                        placeholder="Some completely random and optional value">
+                                                    <label for="email">Some completely random and optional value</label>
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <select class="form-select bg-white" id="mascot">
+                                                        <option value="Grimace">Grimace</option>
+                                                        <option value="Dumpster Fire">A happy dumpster fire</option>
+                                                        <option value="Raccoon">Lisa's raccoon</option>
+                                                    </select>
+                                                    <label for="select1">Choose a mascot</label>
+                                                </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" onclick="identifyNewVisitor()"
+                            id="identify">identify!</a>
+                    </div>
+                    <script type="text/javascript">
+                        function identifyNewVisitor() {
+                            // get the entered values
+                            let pendoVisitor = document.getElementById("visitorField").value;
+                            let pendoAccount = document.getElementById("accountField").value;
+                            let randomValue = document.getElementById("randomField").value;
+                            let mascotValue = document.getElementById("mascot").value;
+                            // feed them into an initialize statement
+                            pendo.initialize({
+                                visitor: {
+                                    id: pendoVisitor,
+                                    random: randomValue
+                                },
+                                account: {
+                                    id: pendoAccount,
+                                    mascot: mascotValue
+                                }
+                            });
+                            // save the values to local storage for future reference
+                            localStorage.setItem('visitor', pendoVisitor);
+                            localStorage.setItem('account', pendoAccount);
+
+                            // this updates the current visitor to what the agent now knows
+                            let currentVisitor = localStorage.getItem('visitor')
+                            document.getElementById("currentVisitorId").innerText = currentVisitor;
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+
+
     <!-- Services Start -->
     <div class="container-fluid bg-light service py-5">
         <div class="container py-5">
@@ -161,8 +313,10 @@
                                 class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
                                 <div class="service-content text-end">
                                     <h5 class="mb-4">WorldWide Tours</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -176,8 +330,10 @@
                                 class="service-content-inner d-flex align-items-center  bg-white border border-primary rounded p-4 pe-0">
                                 <div class="service-content text-end">
                                     <h5 class="mb-4">Hotel Reservation</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -191,8 +347,10 @@
                                 class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
                                 <div class="service-content text-end">
                                     <h5 class="mb-4">Travel Guides</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -206,8 +364,10 @@
                                 class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
                                 <div class="service-content text-end">
                                     <h5 class="mb-4">Event Management</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -228,8 +388,10 @@
                                 </div>
                                 <div class="service-content">
                                     <h5 class="mb-4">WorldWide Tours</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -243,8 +405,10 @@
                                 </div>
                                 <div class="service-content">
                                     <h5 class="mb-4">Hotel Reservation</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -258,8 +422,10 @@
                                 </div>
                                 <div class="service-content">
                                     <h5 class="mb-4">Travel Guides</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -273,8 +439,10 @@
                                 </div>
                                 <div class="service-content">
                                     <h5 class="mb-4">Event Management</h5>
-                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit
-                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore
+                                    <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum,
+                                        suscipit
+                                        expedita corrupti officiis debitis possimus nam laudantium beatae quidem
+                                        dolore
                                         consequuntur voluptate rem reiciendis, omnis sequi harum earum.
                                     </p>
                                 </div>
@@ -672,7 +840,8 @@
             <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                 <h5 class="section-title px-3">Explore Tour</h5>
                 <h1 class="mb-4">The World</h1>
-                <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto
+                <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam,
+                    architecto
                     doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat
                     corrupti eum cum repellat a laborum quasi.
                 </p>
@@ -894,7 +1063,8 @@
                                     class="fa fa-map-marker-alt me-2"></i>Venice - Italy</small>
                             <small class="flex-fill text-center border-end py-2"><i
                                     class="fa fa-calendar-alt me-2"></i>3 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2
+                                Person</small>
                         </div>
                         <div class="packages-price py-2 px-4">$349.00</div>
                     </div>
@@ -909,7 +1079,8 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                             </div>
-                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt nemo quia
+                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
+                                nemo quia
                                 quae illum aperiam fugiat voluptatem repellat</p>
                         </div>
                         <div class="row bg-primary rounded-bottom mx-0">
@@ -931,7 +1102,8 @@
                                     class="fa fa-map-marker-alt me-2"></i>Venice - Italy</small>
                             <small class="flex-fill text-center border-end py-2"><i
                                     class="fa fa-calendar-alt me-2"></i>3 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2
+                                Person</small>
                         </div>
                         <div class="packages-price py-2 px-4">$449.00</div>
                     </div>
@@ -946,7 +1118,8 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                             </div>
-                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt nemo quia
+                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
+                                nemo quia
                                 quae illum aperiam fugiat voluptatem repellat</p>
                         </div>
                         <div class="row bg-primary rounded-bottom mx-0">
@@ -968,7 +1141,8 @@
                                     class="fa fa-map-marker-alt me-2"></i>Venice - Italy</small>
                             <small class="flex-fill text-center border-end py-2"><i
                                     class="fa fa-calendar-alt me-2"></i>3 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2
+                                Person</small>
                         </div>
                         <div class="packages-price py-2 px-4">$549.00</div>
                     </div>
@@ -983,7 +1157,8 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                             </div>
-                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt nemo quia
+                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
+                                nemo quia
                                 quae illum aperiam fugiat voluptatem repellat</p>
                         </div>
                         <div class="row bg-primary rounded-bottom mx-0">
@@ -1005,7 +1180,8 @@
                                     class="fa fa-map-marker-alt me-2"></i>Thayland</small>
                             <small class="flex-fill text-center border-end py-2"><i
                                     class="fa fa-calendar-alt me-2"></i>3 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2
+                                Person</small>
                         </div>
                         <div class="packages-price py-2 px-4">$649.00</div>
                     </div>
@@ -1020,7 +1196,8 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                             </div>
-                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt nemo quia
+                            <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
+                                nemo quia
                                 quae illum aperiam fugiat voluptatem repellat</p>
                         </div>
                         <div class="row bg-primary rounded-bottom mx-0">
@@ -1043,8 +1220,10 @@
         <div class="mx-auto text-center mb-5" style="max-width: 900px;">
             <h5 class="section-title px-3">Our Gallery</h5>
             <h1 class="mb-4">Tourism & Traveling Gallery.</h1>
-            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto
-                doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti
+            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam,
+                architecto
+                doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat
+                corrupti
                 eum cum repellat a laborum quasi.
             </p>
         </div>
@@ -1402,11 +1581,13 @@
                 <div class="col-lg-6">
                     <h5 class="section-booking-title pe-3">Booking</h5>
                     <h1 class="text-white mb-4">Online Booking</h1>
-                    <p class="text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                    <p class="text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Aspernatur
                         maxime ullam esse fuga blanditiis accusantium pariatur quis sapiente, veniam doloribus
                         praesentium? Repudiandae iste voluptatem fugiat doloribus quasi quo iure officia.
                     </p>
-                    <p class="text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                    <p class="text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Aspernatur
                         maxime ullam esse fuga blanditiis accusantium pariatur quis sapiente, veniam doloribus
                         praesentium? Repudiandae iste voluptatem fugiat doloribus quasi quo iure officia.
                     </p>
@@ -1414,7 +1595,8 @@
                 </div>
                 <div class="col-lg-6">
                     <h1 class="text-white mb-3">Book A Tour Deals</h1>
-                    <p class="text-white mb-4">Get <span class="text-warning">50% Off</span> On Your First Adventure
+                    <p class="text-white mb-4">Get <span class="text-warning">50% Off</span> On Your First
+                        Adventure
                         Trip With Travela. Get More Deal Offers Here.</p>
                     <form>
                         <div class="row g-3">
@@ -1478,7 +1660,8 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary text-white w-100 py-3" type="submit">Book Now</button>
+                                <button class="btn btn-primary text-white w-100 py-3" type="submit">Book
+                                    Now</button>
                             </div>
                         </div>
                     </form>
@@ -1607,8 +1790,10 @@
             <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                 <h5 class="section-title px-3">Our Blog</h5>
                 <h1 class="mb-4">Popular Travel Blogs</h1>
-                <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti deserunt tenetur
-                    sapiente atque. Magni non explicabo beatae sit, vel reiciendis consectetur numquam id similique sunt
+                <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti deserunt
+                    tenetur
+                    sapiente atque. Magni non explicabo beatae sit, vel reiciendis consectetur numquam id
+                    similique sunt
                     error obcaecati ducimus officia maiores.
                 </p>
             </div>
@@ -1634,7 +1819,8 @@
                         <div class="blog-content border border-top-0 rounded-bottom p-4">
                             <p class="mb-3">Posted By: Royal Hamblin </p>
                             <a href="#" class="h4">Adventures Trip</a>
-                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam
+                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam
                                 eos</p>
                             <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
                         </div>
@@ -1661,7 +1847,8 @@
                         <div class="blog-content border border-top-0 rounded-bottom p-4">
                             <p class="mb-3">Posted By: Royal Hamblin </p>
                             <a href="#" class="h4">Adventures Trip</a>
-                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam
+                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam
                                 eos</p>
                             <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
                         </div>
@@ -1688,7 +1875,8 @@
                         <div class="blog-content border border-top-0 rounded-bottom p-4">
                             <p class="mb-3">Posted By: Royal Hamblin </p>
                             <a href="#" class="h4">Adventures Trip</a>
-                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam
+                            <p class="my-3">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam
                                 eos</p>
                             <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
                         </div>
@@ -1709,8 +1897,10 @@
             <div class="testimonial-carousel owl-carousel">
                 <div class="testimonial-item text-center rounded pb-4">
                     <div class="testimonial-comment bg-light rounded p-4">
-                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
-                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam
+                            quasi
                             porro officiis. Vero reiciendis,
                         </p>
                     </div>
@@ -1731,8 +1921,10 @@
                 </div>
                 <div class="testimonial-item text-center rounded pb-4">
                     <div class="testimonial-comment bg-light rounded p-4">
-                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
-                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam
+                            quasi
                             porro officiis. Vero reiciendis,
                         </p>
                     </div>
@@ -1753,8 +1945,10 @@
                 </div>
                 <div class="testimonial-item text-center rounded pb-4">
                     <div class="testimonial-comment bg-light rounded p-4">
-                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
-                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam
+                            quasi
                             porro officiis. Vero reiciendis,
                         </p>
                     </div>
@@ -1775,8 +1969,10 @@
                 </div>
                 <div class="testimonial-item text-center rounded pb-4">
                     <div class="testimonial-comment bg-light rounded p-4">
-                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
-                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam
+                            quasi
                             porro officiis. Vero reiciendis,
                         </p>
                     </div>
@@ -1806,8 +2002,10 @@
             <div class="mx-auto text-center" style="max-width: 900px;">
                 <h5 class="subscribe-title px-3">Subscribe</h5>
                 <h1 class="text-white mb-4">Our Newsletter</h1>
-                <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam,
-                    architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium
+                <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+                    tempore nam,
+                    architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita
+                    laudantium
                     fugiat corrupti eum cum repellat a laborum quasi.
                 </p>
                 <div class="position-relative mx-auto">
@@ -1918,15 +2116,16 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 text-center text-md-end mb-md-0">
-                    <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Your Site Name</a>, All right
+                    <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Your Site Name</a>, All
+                    right
                     reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-start">
                     <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                     <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                     <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a
-                        href="https://themewagon.com">ThemeWagon</a>
+                    Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By
+                    <a href="https://themewagon.com">ThemeWagon</a>
                 </div>
             </div>
         </div>

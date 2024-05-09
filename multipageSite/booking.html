@@ -27,6 +27,27 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script>
+        (function (apiKey) {
+            (function (p, e, n, d, o) {
+                var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
+                v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
+                    o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
+                })(v[w]);
+                y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+            })(window, document, 'script', 'pendo');
+
+            pendo.initialize({
+                visitor: {
+                    id: localStorage.getItem('visitor')
+                },
+                account: {
+                    id: localStorage.getItem('account')
+                }
+            });
+        })('1a320afd-6992-47f3-4486-571abccd1b9c');
+    </script>
 </head>
 
 <body>
@@ -44,8 +65,17 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
-                <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Travela</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
+                <h1 class="m-0" id="displayUrl"><i class="fa fa-map-marker-alt me-3"></i></h1>
+                <script type="text/javascript">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        setTimeout(() => {
+                            document.getElementById("displayUrl").innerText = pendo.getNormalizedUrl();
+                            document.getElementById("displayUrl").style.fontSize = "x-large";
+                        }
+                            , 1000);
+                    });
+                </script>
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -71,7 +101,22 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+                <a href="index.html#login" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">
+                    <div id="visitorIdHeader"></div>
+                    <div id="visitorInstructions"></div>
+                </a>
+                <script type="text/javascript">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        let currentVisitor = localStorage.getItem('visitor');
+                        if (currentVisitor = "") {
+                            document.getElementById("visitorInstructions").innerText = "Please log in"
+                        } else {
+                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                            document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+                            document.getElementById("visitorInstructions").style.fontSize = "x-small";
+                        }
+                    });
+                </script>
             </div>
         </nav>
     </div>
@@ -80,8 +125,7 @@
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
         <div class="container text-center py-5" style="max-width: 900px;">
-            <h3 class="text-white display-3 mb-4">Location API</h1>
-                <p id="currentUrl" class="text-white justify-content-center mb-0"></p>
+            <h1 class="text-white display-3 mb-4">Location API</h1>
         </div>
     </div>
     <!-- Header End -->
@@ -103,7 +147,8 @@
                     <a class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2" onclick="getURL()">Where am I?</a>
                     <script type="text/javascript">
                         function getURL() {
-                            document.getElementById("currentUrl").innerHTML = window.location.href
+                            document.getElementById("displayUrl").innerHTML = window.location.href
+                            alert(window.location.href)
                         }
                     </script>
                 </div>
@@ -178,18 +223,20 @@
                         </div>
                     </form>
                 </div>
-                <div>
+                <!--                 <div>
                     <h2 class="text-white mb-4">setUrl</h2>
-                    <p class="text-white mb-4">Use this to completely replace the browser's url. When using this, you must include the full URL, i.e.
+                    <p class="text-white mb-4">Use this to completely replace the browser's url. When using this, you
+                        must include the full URL, i.e.
                         https://www.geocities.com/underConstruction</p>
                     <div class="col-12">
                         <div class="form-floating">
-                            <textarea class="form-control bg-white border-0" placeholder="Special Request" id="setUrlTo"></textarea>
+                            <textarea class="form-control bg-white border-0" placeholder="Special Request"
+                                id="setUrlTo"></textarea>
                             <label for="setUrlTo">Enter a whoooole new URL. Don't forget the https://</label>
                         </div>
                     </div>
                     <button onclick="updateUrl()" class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2"
-                            id="updateUrlButton">update!</button>
+                        id="updateUrlButton">update!</button>
                     <script type="text/javascript">
                         function updateUrl() {
                             var urlVal = document.getElementById("setUrlField").value;
@@ -197,21 +244,24 @@
                             console.log("URL has been updated to " + urlVal + ". try running a normalizedUrl command");
                         }
                     </script>
-                </div>
+                </div> -->
             </div>
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
                     <hr>
                     <h5 class="section-booking-title pe-3">Location API</h5>
                     <h1 class="text-white mb-4">setUrl</h1>
-                    <p class="text-white mb-4">Use setUrl() to completely replace the browser's url.When using this, <span class="text-warning">you must include the full URL</span>, i.e. https://www.geocities.com/underConstruction
-                        <p class="text-white mb-4"></p>
-                    <p class="text-white mb-4">This can be added to the snippet or tied to a particular action on the page. For this example, it is tied to the click of the button.</p>
+                    <p class="text-white mb-4">Use setUrl() to completely replace the browser's url.When using this,
+                        <span class="text-warning">you must include the full URL</span>, i.e.
+                        https://www.geocities.com/underConstruction
+                    <p class="text-white mb-4"></p>
+                    <p class="text-white mb-4">This can be added to the snippet or tied to a particular action on the
+                        page. For this example, it is tied to the click of the button.</p>
                     <h4 class="text-white mb-4" id="getURLOutput"></h4>
                     <a class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2" onclick="getURL()">Where am I?</a>
                     <script type="text/javascript">
                         function getURL() {
-                            document.getElementById("currentUrl").innerHTML = window.location.href
+                            document.getElementById("displayUrl").innerHTML = pendo.getNormalizedUrl()
                         }
                     </script>
                 </div>
@@ -221,28 +271,40 @@
                         <div class="row g-3">
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control bg-white border-0" placeholder="Special Request" id="setUrlTo"></textarea>
+                                    <textarea class="form-control bg-white border-0" placeholder="Special Request"
+                                        id="setUrlTo"></textarea>
                                     <label for="setUrlTo">Enter a whoooole new URL. Don't forget the https://</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary text-white w-100 py-3" type="submit">Update Now</button>
+                                <button onclick="updateUrl()"
+                                    class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2"
+                                    id="updateUrlButton">Update!</button>
+                                <script type="text/javascript">
+                                    function updateUrl() {
+                                        var urlVal = document.getElementById("setUrlTo").value;
+                                        pendo.location.setUrl(urlVal);
+                                        console.log("URL has been updated to " + urlVal + ". try running a normalizedUrl command");
+                                    }
+                                </script>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div>
+                <!--                 <div>
                     <h2 class="text-white mb-4">setUrl</h2>
-                    <p class="text-white mb-4">Use this to completely replace the browser's url. When using this, you must include the full URL, i.e.
+                    <p class="text-white mb-4">Use this to completely replace the browser's url. When using this, you
+                        must include the full URL, i.e.
                         https://www.geocities.com/underConstruction</p>
                     <div class="col-12">
                         <div class="form-floating">
-                            <textarea class="form-control bg-white border-0" placeholder="Special Request" id="setUrlTo"></textarea>
+                            <textarea class="form-control bg-white border-0" placeholder="Special Request"
+                                id="setUrlTo"></textarea>
                             <label for="setUrlTo">Enter a whoooole new URL. Don't forget the https://</label>
                         </div>
                     </div>
                     <button onclick="updateUrl()" class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2"
-                            id="updateUrlButton">update!</button>
+                        id="updateUrlButton">update!</button>
                     <script type="text/javascript">
                         function updateUrl() {
                             var urlVal = document.getElementById("setUrlField").value;
@@ -250,7 +312,7 @@
                             console.log("URL has been updated to " + urlVal + ". try running a normalizedUrl command");
                         }
                     </script>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
