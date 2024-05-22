@@ -27,6 +27,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- PENDO SNIPPET LIVES HERE -->
     <script>
         (function (apiKey) {
             (function (p, e, n, d, o) {
@@ -39,13 +41,11 @@
             })(window, document, 'script', 'pendo');
 
             pendo.initialize({
-                //by adding the events section below, it clears any exisitng visitorId
-                //that the agent may be holding onto from a previous page
-                events: {
-                    ready: function () {
-                        console.log('calling clearSession');
-                        pendo.clearSession();
-                    }
+                visitor: {
+                    id: localStorage.getItem('visitor')
+                },
+                account: {
+                    id: localStorage.getItem('account')
                 }
             });
         })('1a320afd-6992-47f3-4486-571abccd1b9c');
@@ -67,7 +67,6 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
-                <h1 class="m-0">Escalation Engineering</h1>
                 <img src="/assets/img/dumpster-fire.gif" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -75,17 +74,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="index.html" class="nav-item nav-link">Home</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="services.html" class="nav-item nav-link">Services</a>
                     <a href="packages.html" class="nav-item nav-link">Packages</a>
                     <a href="blog.html" class="nav-item nav-link">Blog</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
                             <a href="destination.html" class="dropdown-item">Destination</a>
                             <a href="tour.html" class="dropdown-item">Explore Tour</a>
-                            <a href="locationAPI.html" class="dropdown-item">Location API</a>
+                            <a href="locationApi.html" class="dropdown-item active">Location API</a>
                             <a href="gallery.html" class="dropdown-item">Our Gallery</a>
                             <a href="guides.html" class="dropdown-item">Travel Guides</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
@@ -94,7 +93,22 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+                <a href="index.html#login" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">
+                    <div id="visitorIdHeader"></div>
+                    <div id="visitorInstructions"></div>
+                </a>
+                <script type="text/javascript">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        let currentVisitor = localStorage.getItem('visitor');
+                        if (currentVisitor = "" || currentVisitor == null) {
+                            document.getElementById("visitorInstructions").innerText = "Please log in"
+                        } else {
+                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                            document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+                            document.getElementById("visitorInstructions").style.fontSize = "x-small";
+                        };
+                    });
+                </script>
             </div>
         </nav>
 
@@ -272,7 +286,7 @@
                             let randomValue = document.getElementById("randomField").value;
                             let mascotValue = document.getElementById("mascot").value;
                             // feed them into an initialize statement
-                            pendo.initialize({
+                            pendo.identify({
                                 visitor: {
                                     id: pendoVisitor,
                                     random: randomValue

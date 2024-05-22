@@ -114,6 +114,7 @@
     </script>
 </head>
 
+
 <body>
 
     <!-- Spinner Start -->
@@ -125,11 +126,11 @@
     </div>
     <!-- Spinner End -->
 
-    <!-- Navbar & Hero Start -->
+    <!-- Navbar Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
-                <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i></h1>
+                <img src="/assets/img/dumpster-fire.gif" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -146,7 +147,7 @@
                         <div class="dropdown-menu m-0">
                             <a href="destination.html" class="dropdown-item">Destination</a>
                             <a href="tour.html" class="dropdown-item">Explore Tour</a>
-                            <a href="booking.html" class="dropdown-item active">Location API</a>
+                            <a href="locationApi.html" class="dropdown-item active">Location API</a>
                             <a href="gallery.html" class="dropdown-item">Our Gallery</a>
                             <a href="guides.html" class="dropdown-item">Travel Guides</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
@@ -162,19 +163,19 @@
                 <script type="text/javascript">
                     document.addEventListener("DOMContentLoaded", function () {
                         let currentVisitor = localStorage.getItem('visitor');
-                        if (currentVisitor = "") {
+                        if (currentVisitor = "" || currentVisitor == null) {
                             document.getElementById("visitorInstructions").innerText = "Please log in"
                         } else {
                             document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
                             document.getElementById("visitorInstructions").innerText = "Click to change visitor"
                             document.getElementById("visitorInstructions").style.fontSize = "x-small";
-                        }
+                        };
                     });
                 </script>
             </div>
         </nav>
     </div>
-    <!-- Navbar & Hero End -->
+    <!-- Navbar End -->
 
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
