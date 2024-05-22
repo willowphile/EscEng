@@ -84,8 +84,8 @@
     });
 
 
-    // testimonial carousel
-    $(".testimonial-carousel").owlCarousel({
+    // selfHosted carousel
+    $(".selfHosted-carousel").owlCarousel({
         autoplay: true,
         smartSpeed: 1000,
         center: true,
