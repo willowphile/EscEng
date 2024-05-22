@@ -92,9 +92,9 @@
                     document.addEventListener("DOMContentLoaded", function () {
                         let currentVisitor = localStorage.getItem('selfHostedVisitor');
                         if (currentVisitor = "" || currentVisitor == null) {
-                            document.getElementById("visitorInstructions").innerText = "Please log in"
+                            document.getElementById("visitorInstructions").innerText = "Please log in below"
                         } else {
-                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('selfHostedVisitor');
                             document.getElementById("visitorInstructions").innerText = "Click to change visitor"
                             document.getElementById("visitorInstructions").style.fontSize = "x-small";
                         };
@@ -114,7 +114,176 @@
     </div>
     <!-- Header End -->
 
-    <!-- selfHosted Start -->
+    <!-- selfHosted Login Start -->
+    <div class="container-fluid selfHosted py-5">
+        <div class="container py-5" id="login">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Identity</h5>
+                <h1 class="mb-0">Visitor Identification</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div
+                                class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                <div class="service-content">
+                                    <h5 class="mb-4">Who are you?</h5>
+                                    <p>
+                                        Pendo has been initialized, but with clearSession. Every time you refresh
+                                        this page, you become anonymous and the government can no longer track you.
+                                    </p>
+                                    <h5 class="mb-4">What's a self-hosted agent?</h5>
+                                    <p>
+                                        These are the same pendo.js files that all browsers download when a snippet
+                                        is properly installed. The differences are:
+                                    </p>
+                                    <ul>
+                                        <li><i class="ri-check-double-line"></i> They are hosted on the client's servers
+                                        </li>
+                                        <li><i class="ri-check-double-line"></i> They do not update automatically
+                                        </li>
+                                    </ul>
+                                    <h5 class="mb-4">How can you tell?</h5>
+                                    <p>
+                                        Many times, the contact at the client may not know if they self-host.
+                                        You can check a few different ways.
+                                    </p>
+                                    <ul>
+                                        <li><i class="ri-check-double-line"></i> Check the url in the snippet.
+                                        </li>
+                                        <li><i class="ri-check-double-line"></i> Look at a meta event for
+                                            <code>"selfHosted": true</code>
+                                        </li>
+                                        <li><i class="ri-check-double-line"></i> Compare <code>pendo.VERSION</code> to
+                                            the agent version in the UI.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div
+                                class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                <div class="service-content" style="width:97%">
+                                    <h5 class="mb-4">"Log in" for science!</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control bg-white" id="visitorField"
+                                                    placeholder="Visitor ID">
+                                                <label for="name">Visitor ID</label>
+                                            </div>
+
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control bg-white" id="accountField"
+                                                    placeholder="Account ID">
+                                                <label for="email">Account ID</label>
+                                            </div>
+
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control bg-white" id="randomField"
+                                                    placeholder="Some completely random and optional value">
+                                                <label for="email">Some completely random and optional value</label>
+                                            </div>
+
+                                            <div class="form-floating">
+                                                <select class="form-select bg-white" id="mascot">
+                                                    <option value="Grimace">Grimace</option>
+                                                    <option value="Dumpster Fire">A happy dumpster fire</option>
+                                                    <option value="Raccoon">Lisa's raccoon</option>
+                                                </select>
+                                                <label for="select1">Choose a mascot</label>
+                                            </div>
+                                            <hr>
+                                            <div class="service-content">
+                                                <h5 class="mb-4">You are currently identified as:</h5>
+                                            <ul >
+                                                <li>Visitor: <code id="currentVisitorId"></code></li>
+                                                <li>Account: <code id="currentAccountId"></code></i></li>
+                                            </ul>
+                                        </div>
+                                            <script>
+                                                setTimeout(
+                                                    function () {
+                                                        var pendoVisitorId = pendo.getVisitorId();
+                                                        var pendoAccountId = pendo.getAccountId();
+                                                        document.getElementById("currentVisitorId").innerText = pendoVisitorId;
+                                                        document.getElementById("currentAccountId").innerText = pendoAccountId;
+                                                    },
+                                                    1000
+                                                ); 
+                                            </script>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" onclick="identifyNewVisitor()"
+                            id="identify">identify!</a>
+                    </div>
+                    <script type="text/javascript">
+                        function identifyNewVisitor() {
+                            // get the entered values
+                            let pendoVisitor = document.getElementById("visitorField").value;
+                            let pendoAccount = document.getElementById("accountField").value;
+                            let randomValue = document.getElementById("randomField").value;
+                            let mascotValue = document.getElementById("mascot").value;
+                            // feed them into an initialize statement
+                            pendo.identify({
+                                visitor: {
+                                    id: pendoVisitor,
+                                    random: randomValue
+                                },
+                                account: {
+                                    id: pendoAccount,
+                                    mascot: mascotValue
+                                }
+                            });
+                            // save the values to local storage for future reference
+                            localStorage.setItem('selfHostedVisitor', pendoVisitor);
+                            localStorage.setItem('selfHostedAccount', pendoAccount);
+
+                            // this updates the current visitor to what the agent now knows
+                            let currentVisitor = localStorage.getItem('selfHostedVisitor')
+                            document.getElementById("currentVisitorId").innerText = pendo.visitorId;
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- selfHosted Login End -->
+
+    <!-- Subscribe Start -->
+    <div class="container-fluid selfHostedBanner2 py-5">
+        <div class="container text-center py-5">
+            <div class="mx-auto text-center" style="max-width: 900px;">
+                <h1 class="text-white mb-4">Our Newsletter</h1>
+                <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam,
+                    architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium
+                    fugiat corrupti eum cum repellat a laborum quasi.
+                </p>
+                <div class="position-relative mx-auto">
+                    <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                        placeholder="Your email">
+                    <button type="button"
+                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subscribe End -->
+
+    <!-- selfHosted Login Start -->
     <div class="container-fluid selfHosted py-5">
         <div class="container py-5">
             <div class="mx-auto text-center mb-5" style="max-width: 900px;">
@@ -213,27 +382,7 @@
             </div>
         </div>
     </div>
-    <!-- selfHosted End -->
-
-    <!-- Subscribe Start -->
-    <div class="container-fluid selfHostedHeader py-5">
-        <div class="container text-center py-5">
-            <div class="mx-auto text-center" style="max-width: 900px;">
-                <h1 class="text-white mb-4">Our Newsletter</h1>
-                <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam,
-                    architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium
-                    fugiat corrupti eum cum repellat a laborum quasi.
-                </p>
-                <div class="position-relative mx-auto">
-                    <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text"
-                        placeholder="Your email">
-                    <button type="button"
-                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Subscribe End -->
+    <!-- selfHosted Login End -->
 
     <!-- Footer Start -->
     <div class="container-fluid footer py-5">

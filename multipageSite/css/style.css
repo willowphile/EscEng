@@ -403,11 +403,10 @@
 }
 
 .selfHostedHeader {
-    background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(../img/selfHosted.jpeg);
-    background-position: center center;
+    background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(../img/agentSmith.jpeg);
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
     padding: 150px 0 50px 0;
 }
 
@@ -1221,6 +1220,14 @@
 /*** Subscribe Start ***/
 .subscribe {
     background: linear-gradient(rgba(19, 53, 123, .6), rgba(19, 53, 123, .6)), url(../img/subscribe-img.jpg);
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.selfHostedBanner2 {
+    background: linear-gradient(rgba(19, 53, 123, .6), rgba(19, 53, 123, .6)), url(../img/selfHosted.jpeg);
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
