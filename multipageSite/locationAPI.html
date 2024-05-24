@@ -161,16 +161,17 @@
                     <div id="visitorInstructions"></div>
                 </a>
                 <script type="text/javascript">
-                    document.addEventListener("DOMContentLoaded", function () {
-                        let currentVisitor = localStorage.getItem('visitor');
+                    setInterval(function () {
+                        let currentVisitor = localStorage.getItem('selfHostedVisitor');
                         if (currentVisitor = "" || currentVisitor == null) {
-                            document.getElementById("visitorInstructions").innerText = "Please log in"
+                            document.getElementById("visitorInstructions").innerText = "Please log in below"
                         } else {
-                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('selfHostedVisitor');
                             document.getElementById("visitorInstructions").innerText = "Click to change visitor"
                             document.getElementById("visitorInstructions").style.fontSize = "x-small";
                         };
-                    });
+                    },
+                        1000);
                 </script>
             </div>
         </nav>

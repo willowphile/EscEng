@@ -89,7 +89,7 @@
                     <div id="visitorInstructions"></div>
                 </a>
                 <script type="text/javascript">
-                    document.addEventListener("DOMContentLoaded", function () {
+                    setInterval(function () {
                         let currentVisitor = localStorage.getItem('selfHostedVisitor');
                         if (currentVisitor = "" || currentVisitor == null) {
                             document.getElementById("visitorInstructions").innerText = "Please log in below"
@@ -98,8 +98,10 @@
                             document.getElementById("visitorInstructions").innerText = "Click to change visitor"
                             document.getElementById("visitorInstructions").style.fontSize = "x-small";
                         };
-                    });
+                    },
+                        1000);
                 </script>
+
             </div>
         </nav>
     </div>
@@ -202,13 +204,13 @@
                                             <hr>
                                             <div class="service-content">
                                                 <h5 class="mb-4">You are currently identified as:</h5>
-                                            <ul >
-                                                <li>Visitor: <code id="currentVisitorId"></code></li>
-                                                <li>Account: <code id="currentAccountId"></code></i></li>
-                                            </ul>
-                                        </div>
+                                                <ul>
+                                                    <li>Visitor: <code id="currentVisitorId"></code></li>
+                                                    <li>Account: <code id="currentAccountId"></code></i></li>
+                                                </ul>
+                                            </div>
                                             <script>
-                                                setTimeout(
+                                                setInterval(
                                                     function () {
                                                         var pendoVisitorId = pendo.getVisitorId();
                                                         var pendoAccountId = pendo.getAccountId();
@@ -238,7 +240,7 @@
                             let randomValue = document.getElementById("randomField").value;
                             let mascotValue = document.getElementById("mascot").value;
                             // feed them into an initialize statement
-                            pendo.identify({
+                            pendo.initialize({
                                 visitor: {
                                     id: pendoVisitor,
                                     random: randomValue
@@ -267,12 +269,14 @@
     <div class="container-fluid selfHostedBanner2 py-5">
         <div class="container text-center py-5">
             <div class="mx-auto text-center" style="max-width: 900px;">
-                <h1 class="text-white mb-4">The rest of this page is just a bunch of things to click and target with guides</h1>
+                <h1 class="text-white mb-4">The rest of this page is just a bunch of things to click and target with
+                    guides</h1>
                 <div class="position-relative mx-auto">
-                    <input id="searchBar" class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text"
-                        placeholder="this would be a good place for a click event property">
+                    <input id="searchBar" class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5"
+                        type="text" placeholder="this would be a good place for a click event property">
                     <button type="button" onclick="buttonClicked()"
-                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Click me!</button>
+                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Click
+                        me!</button>
                     <p class="text-white" id="buttonClicked"></p>
                     <script type="text/javascript">
                         function buttonClicked() {
@@ -391,7 +395,8 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-lg-12 text-center=">
-                    <img src="img/eeIcon.png" style="max-width: 75px;">Brought to you by Escalation Engineering. Site template designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                    <img src="img/eeIcon.png" style="max-width: 75px;">Brought to you by Escalation Engineering. Site
+                    template designed By <a href="https://htmlcodex.com">HTML Codex</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JWT</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- PENDO SNIPPET LIVES HERE -->
+    <script>
+        (function (apiKey) {
+            (function (p, e, n, d, o) {
+                var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
+                v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
+                    o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
+                })(v[w]);
+                y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+            })(window, document, 'script', 'pendo');
+        })('ac97ebe0-6811-4ec0-66d7-c5d281a4d2b5');
+    </script>
+
+    <!-- Used with jwt-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="/assets/img/dumpster-fire.gif" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="services.html" class="nav-item nav-link">Services</a>
+                    <a href="packages.html" class="nav-item nav-link">Packages</a>
+                    <a href="blog.html" class="nav-item nav-link">Blog</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="destination.html" class="dropdown-item">Destination</a>
+                            <a href="tour.html" class="dropdown-item">Explore Tour</a>
+                            <a href="locationApi.html" class="dropdown-item active">Location API</a>
+                            <a href="gallery.html" class="dropdown-item">Our Gallery</a>
+                            <a href="guides.html" class="dropdown-item">Travel Guides</a>
+                            <a href="selfHosted.html" class="dropdown-item">selfHosted</a>
+                            <a href="404.html" class="dropdown-item">404 Page</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="selfHosted.html#login" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">
+                    <div id="visitorIdHeader"></div>
+                    <div id="visitorInstructions"></div>
+                </a>
+                <script type="text/javascript">
+                    setInterval(function () {
+                        let currentVisitor = localStorage.getItem('jwtVisitor');
+                        if (currentVisitor = "" || currentVisitor == null) {
+                            document.getElementById("visitorInstructions").innerText = "Please log in below"
+                        } else {
+                            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('jwtVisitor');
+                            document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+                            document.getElementById("visitorInstructions").style.fontSize = "x-small";
+                        };
+                    },
+                        1000);
+                </script>
+
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid jwtHeader">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="text-white display-3 mb-4">JSON Web Tokens</h1>
+                <p class="text-center text-white mb-5">This page is a separate app with JWT enabled.</p>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- JWT Login Start -->
+    <div class="container-fluid selfHosted py-5">
+        <div class="container py-5" id="login">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Identity yourself</h5>
+            </div>
+            <div class="row g-4" style="display: flex; justify-content: center; align-items: center;">
+
+                <div class="col-lg-9">
+                    <div
+                        class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                        <div class="service-content" style="width:97%">
+                            <h5 class="mb-4">"Log in" for science!</h5>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-white" id="visitorField"
+                                            placeholder="Visitor ID">
+                                        <label for="name">Visitor ID</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-white" id="accountField"
+                                            placeholder="Account ID">
+                                        <label for="email">Account ID</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-white" id="randomField"
+                                            placeholder="Some completely random and optional value">
+                                        <label for="email">Some completely random and optional value</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <select class="form-select bg-white" id="mascot">
+                                            <option value="Grimace">Grimace</option>
+                                            <option value="Dumpster Fire">A happy dumpster fire</option>
+                                            <option value="Raccoon">Lisa's raccoon</option>
+                                        </select>
+                                        <label for="select1">Choose a mascot</label>
+                                    </div>
+                                    <hr>
+                                    <div class="service-content">
+                                        <h5 class="mb-4">You are currently identified as:</h5>
+                                        <ul>
+                                            <li>Visitor: <code id="currentVisitorId"></code></li>
+                                            <li>Account: <code id="currentAccountId"></code></i></li>
+                                        </ul>
+                                    </div>
+                                    <script>
+                                        setInterval(
+                                            function () {
+                                                var pendoVisitorId = pendo.getVisitorId();
+                                                var pendoAccountId = pendo.getAccountId();
+                                                document.getElementById("currentVisitorId").innerText = pendoVisitorId;
+                                                document.getElementById("currentAccountId").innerText = pendoAccountId;
+                                            },
+                                            1000
+                                        ); 
+                                    </script>
+                                    <div class="service-content" id="postInitBlock" style="display: none">
+                                        <h5 class="mb-4">Your visitor data was sent to Pendo as:</h5>
+                                        <ul>
+                                            <li>Identity payload:
+                                                <pre><code id="identifyData"></code></pre>
+                                            </li>
+                                            <li>Transformed into JWT: <code id="jwt"
+                                                    style="color: black;text-wrap: wrap;"></code></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="text-center">
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" onclick="identifyNewVisitor()"
+                            id="identify">identify!</a>
+                    </div>
+                    <script type="text/javascript">
+                        function identifyNewVisitor() {
+                            // get the entered values
+                            let pendoVisitor = document.getElementById("visitorField").value;
+                            let pendoAccount = document.getElementById("accountField").value;
+                            let randomValue = document.getElementById("randomField").value;
+                            let mascotValue = document.getElementById("mascot").value;
+
+                            // Defining our token parts
+                            var header = {
+                                alg: "HS256",
+                                typ: "JWT"
+                            };
+
+                            // this is used to make each jwt unique. it doesn't do anything once it gets to pendo
+                            var nonceValue = Date.now();
+
+                            var data = {
+                                visitor: {
+                                    id: pendoVisitor,
+                                    random: randomValue
+                                },
+                                account: {
+                                    id: pendoAccount,
+                                    mascot: mascotValue
+                                },
+                                nonce: nonceValue
+                            };
+
+                            // secret from jwt settings in Pendo app install settings
+                            var secret = "e8489215-a326-469b-4a1c-602c68834d87";
+
+                            function base64url(source) {
+                                // Encode in classical base64
+                                encodedSource = CryptoJS.enc.Base64.stringify(source);
+
+                                // Remove padding equal characters
+                                encodedSource = encodedSource.replace(/=+$/, "");
+
+                                // Replace characters according to base64url specifications
+                                encodedSource = encodedSource.replace(/\+/g, "-");
+                                encodedSource = encodedSource.replace(/\//g, "_");
+
+                                return encodedSource;
+                            }
+
+                            var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+                            var encodedHeader = base64url(stringifiedHeader);
+                            //document.getElementById("header").innerText = encodedHeader;
+
+                            var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+                            var encodedData = base64url(stringifiedData);
+                            //document.getElementById("payload").innerText = encodedData;
+
+                            var signature = encodedHeader + "." + encodedData;
+                            signature = CryptoJS.HmacSHA256(signature, secret);
+                            signature = base64url(signature);
+                            // document.getElementById("signature").innerText = signature;
+
+
+                            // put the header, data, and signature together
+                            var newJWT = encodedHeader + "." + encodedData + "." + signature;
+
+                            // feed it into initialize with the signing key from app install settings
+                            var initPayload = {
+                                jwt: newJWT,
+                                signingKeyName: 'tech-jwt-lODBt'
+                            };
+
+                            pendo.initialize(initPayload);
+
+                            // save the values to local storage for future reference
+                            localStorage.setItem('jwtVisitor', pendoVisitor);
+                            localStorage.setItem('jwtAccount', pendoAccount);
+
+                            // this updates the current visitor to what the agent now knows
+                            let currentVisitor = localStorage.getItem('jwtVisitor')
+                            document.getElementById("currentVisitorId").innerText = pendo.visitorId;
+
+                            document.getElementById("identifyData").textContent = JSON.stringify(data, undefined, 2);
+                            document.getElementById("jwt").textContent = JSON.stringify(newJWT, undefined, 2);
+                            document.getElementById("postInitBlock").style.display = "block";
+
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JWT Login End -->
+
+    <!-- Subscribe Start -->
+    <div class="container-fluid selfHostedBanner2 py-5">
+        <div class="container text-center py-5">
+            <div class="mx-auto text-center" style="max-width: 900px;">
+                <h1 class="text-white mb-4">The rest of this page is just a bunch of things to click and target with
+                    guides</h1>
+                <div class="position-relative mx-auto">
+                    <input id="searchBar" class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5"
+                        type="text" placeholder="this would be a good place for a click event property">
+                    <button type="button" onclick="buttonClicked()"
+                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Click
+                        me!</button>
+                    <p class="text-white" id="buttonClicked"></p>
+                    <script type="text/javascript">
+                        function buttonClicked() {
+                            document.getElementById("buttonClicked").innerText = "You clicked it!"
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subscribe End -->
+
+    <!-- selfHosted Login Start -->
+    <div class="container-fluid selfHosted py-5">
+        <div class="container py-5">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">selfHosted</h5>
+                <h1 class="mb-0">Our Clients Say!!!</h1>
+            </div>
+            <div class="selfHosted-carousel owl-carousel">
+                <div class="selfHosted-item text-center rounded pb-4">
+                    <div class="selfHosted-comment bg-light rounded p-4">
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                            porro officiis. Vero reiciendis,
+                        </p>
+                    </div>
+                    <div class="selfHosted-img p-1">
+                        <img src="img/selfHosted-1.jpg" class="img-fluid rounded-circle" alt="Image">
+                    </div>
+                    <div style="margin-top: -35px;">
+                        <h5 class="mb-0">John Abraham</h5>
+                        <p class="mb-0">New York, USA</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="selfHosted-item text-center rounded pb-4">
+                    <div class="selfHosted-comment bg-light rounded p-4">
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                            porro officiis. Vero reiciendis,
+                        </p>
+                    </div>
+                    <div class="selfHosted-img p-1">
+                        <img src="img/selfHosted-2.jpg" class="img-fluid rounded-circle" alt="Image">
+                    </div>
+                    <div style="margin-top: -35px;">
+                        <h5 class="mb-0">John Abraham</h5>
+                        <p class="mb-0">New York, USA</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="selfHosted-item text-center rounded pb-4">
+                    <div class="selfHosted-comment bg-light rounded p-4">
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                            porro officiis. Vero reiciendis,
+                        </p>
+                    </div>
+                    <div class="selfHosted-img p-1">
+                        <img src="img/selfHosted-3.jpg" class="img-fluid rounded-circle" alt="Image">
+                    </div>
+                    <div style="margin-top: -35px;">
+                        <h5 class="mb-0">John Abraham</h5>
+                        <p class="mb-0">New York, USA</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="selfHosted-item text-center rounded pb-4">
+                    <div class="selfHosted-comment bg-light rounded p-4">
+                        <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
+                            nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
+                            porro officiis. Vero reiciendis,
+                        </p>
+                    </div>
+                    <div class="selfHosted-img p-1">
+                        <img src="img/selfHosted-4.jpg" class="img-fluid rounded-circle" alt="Image">
+                    </div>
+                    <div style="margin-top: -35px;">
+                        <h5 class="mb-0">John Abraham</h5>
+                        <p class="mb-0">New York, USA</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- selfHosted Login End -->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright text-body py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-12 text-center=">
+                    <img src="img/eeIcon.png" style="max-width: 75px;">Brought to you by Escalation Engineering. Site
+                    template designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
