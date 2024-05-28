@@ -640,11 +640,11 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+<!--           <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
             <div class="box">
               <h3>Here's another; do you like:</h3>
               <!-- <h4><sup>$</sup>0<span> / month</span></h4>
-               -->
+               
               <select class="form-select" aria-label="select dropdown">
                 <option selected>Flowers</option>
                 <option value="1">Fungi</option>
@@ -653,9 +653,41 @@
                 <option value="3">Rocks</option>
               </select>
               
+          </div> -->
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>Or maybe you want to track when an upload completes?</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               -->
+               <div id="Progress_Status"> 
+                <div id="myprogressBar">1%</div> 
+              </div> 
+                
+              <br> 
+              <button onclick="update()">Start Upload</button>  
+                
+              <script> 
+                
+              function update() { 
+                var element = document.getElementById("myprogressBar");    
+                var width = 1; 
+                var identity = setInterval(scene, 10); 
+                function scene() { 
+                  if (width >= 100) { 
+                    clearInterval(identity); 
+                  } else { 
+                    width++;  
+                    element.style.width = width + '%';  
+                    element.innerHTML = width * 1  + '%'; 
+                  } 
+                } 
+              } 
+                
+              </script> 
+              
           </div>
         </div>
-      </div>
+      </div>      
     </section>
     <!-- End trackEvents Section -->
     <!-- ======= Console Commands Section ======= -->
