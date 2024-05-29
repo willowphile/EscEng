@@ -571,6 +571,12 @@ section {
   text-decoration: none;
 }
 
+.identify input{
+  border-radius: 10px;
+}
+
+
+
 /*--------------------------------------------------------------
 # clickEvents
 --------------------------------------------------------------*/
@@ -994,7 +1000,6 @@ section {
 }
 
 .trackEvents .recommended-badge {
-  position: absolute;
   top: 5px;
   left: 50%;
   transform: translateX(-50%);
@@ -1007,18 +1012,26 @@ section {
 }
 
 #Progress_Status { 
-  width: 50%; 
+  width: 100%; 
   background-color: #ddd; 
+  border-radius: 25px;
 } 
   
 #myprogressBar { 
-  width: 1%; 
-  height: 35px; 
-  background-color: #4CAF50; 
+  width: 0%; 
+  height: 40px; 
+  background-color: #e43c5c; 
   text-align: center; 
   line-height: 32px; 
   color: black; 
+  border-radius: 25px;
 } 
+
+.trackEvents input{
+  border-radius: 10px;
+  width: 100%;
+  margin: auto;
+}
 /*--------------------------------------------------------------
 # F.A.Q
 --------------------------------------------------------------*/
