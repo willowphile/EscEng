@@ -356,9 +356,9 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# home Section
 --------------------------------------------------------------*/
-#hero {
+#home {
   width: 100%;
   height: 100vh;
   background: url("../img/grimace.jpg") top center;
@@ -366,7 +366,7 @@ h6 {
   position: relative;
 }
 
-#hero:before {
+#home:before {
   content: "";
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
@@ -376,7 +376,7 @@ h6 {
   right: 0;
 }
 
-#hero .hero-container {
+#home .home-container {
   position: absolute;
   bottom: 0;
   top: 0;
@@ -390,7 +390,7 @@ h6 {
   padding: 0 15px;
 }
 
-#hero h3 {
+#home h3 {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-size: 26px;
@@ -399,7 +399,7 @@ h6 {
   border-radius: 50px;
 }
 
-#hero h1 {
+#home h1 {
   margin: 0 0 10px 0;
   font-size: 48px;
   font-weight: 700;
@@ -408,13 +408,13 @@ h6 {
   color: #fff;
 }
 
-#hero h2 {
+#home h2 {
   color: #eee;
   margin-bottom: 40px;
   font-size: 24px;
 }
 
-#hero .btn-get-started {
+#home .btn-get-started {
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: 400;
@@ -428,28 +428,28 @@ h6 {
   color: #fff;
 }
 
-#hero .btn-get-started:hover {
+#home .btn-get-started:hover {
   background: #e43c5c;
   border: 2px solid #e43c5c;
 }
 
 @media (min-width: 1024px) {
-  #hero {
+  #home {
     background-attachment: fixed;
   }
 }
 
 @media (max-width: 768px) {
-  #hero h3 {
+  #home h3 {
     font-size: 22px;
   }
 
-  #hero h1 {
+  #home h1 {
     font-size: 28px;
     line-height: 36px;
   }
 
-  #hero h2 {
+  #home h2 {
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 30px;
@@ -457,7 +457,7 @@ h6 {
 }
 
 @media (max-height: 500px) {
-  #hero {
+  #home {
     height: 150vh;
   }
 }
@@ -692,8 +692,8 @@ section {
 # pages
 --------------------------------------------------------------*/
 .pages {
-  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.8)), url("../img/pages-bg.jpg") center center;
-  background-size: cover;
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.8)), url("../img/pages_bg.jpg") center center;
+  background-size: fit;
   padding: 60px 0;
 }
 
@@ -1559,4 +1559,8 @@ section {
 #footer .footer-btn:hover {
   background: #e43c5c;
   color: #fff;
+}
+
+#notATrap {
+  pointer-events: none;
 }

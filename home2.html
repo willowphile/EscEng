@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EEEEEEEEEEEE</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    #getData {
+      height: 150px;
+      width: 150px;
+      padding: 10px;
+      border: 1px solid #e43c5c;
+      border-radius: 10px;
+    }
+  </style>
+
+  <!-- =======================================================
+         *** Don't worry about anything above this line! ***
+         ======================================================== -->
+
+  <script>
+    (function (apiKey) {
+      (function (p, e, n, d, o) {
+        var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
+        v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
+          o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
+        })(v[w]);
+        y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+        z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+      })(window, document, 'script', 'pendo');
+    })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');
+  </script>
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container align-items-center" style="text-align: center;">
+      <h1 class="logo">
+        <img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid">
+        <a href="">Escalation Engineering</a>
+        <img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid">
+      </h1>
+    </div>
+  </header>
+  <!-- End Header -->
+  <!-- ======= home Section ======= -->
+  <section id="home">
+    <div class="home-container">
+      <h3>Welcome to <strong>Let's Break Shit with EE</strong></h3>
+      <h2>This site is designed to be easy to navigate, update, and break</h2>
+      <p style="color:white;">This single-page site is full of all manners of click-related things<br>
+        For other Pendo functions, check out the menus above.</p>
+      <a href="#identify" class="btn-get-started scrollto">Get Started</a>
+      
+    </div>
+  </section>
+  <!-- End home -->
+  <main id="main">
+    <!-- ======= identify Section ======= -->
+    <section id="identify" class="identify anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Identify</h2>
+          <h3>Let's start with <span>Identification</span></h3>
+          <p>Pendo hasn't been initialized yet. Right now, the government is not tracking you.
+          </p>
+        </div>
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              By "logging in" here, you will:
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Trigger a pendo.initialize() event with the entered info.</li>
+              <li><i class="ri-check-double-line"></i> Set your visitor and account IDs in local storage for later
+                reference.
+              </li>
+              <li><i class="ri-check-double-line"></i> You are currently identified as visitor: </li>
+              <li id="currentVisitorId"></li>
+            </ul>
+            <script>
+              setTimeout(
+                function () {
+                  var pendoVisitorId = pendo.getVisitorId();
+                  document.getElementById("currentVisitorId").innerText = pendoVisitorId;
+                },
+                1000
+              ); 
+            </script>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <div>Enter your visitorId: <input type="text" id="visitorField" value="exampleVisitor"></div>
+            <div>Enter your accountId: <input type="text" id="accountField" value="exampleAccount"></div>
+            <button onclick="identifyNewVisitor()" class="btn-learn-more" id="identify">identify!</button>
+            <script type="text/javascript">
+              function identifyNewVisitor() {
+                // get the entered values
+                let pendoVisitor = document.getElementById("visitorField").value;
+                let pendoAccount = document.getElementById("accountField").value;
+                // feed them into an initialize statement
+                pendo.initialize({
+                  visitor: {
+                    id: pendoVisitor,
+                    random: "autoGenerated"
+                  },
+                  account: {
+                    id: pendoAccount
+                  }
+                });
+                // save the values to local storage for future reference
+                localStorage.setItem('visitor', pendoVisitor);
+                localStorage.setItem('account', pendoAccount);
+
+                // this updates the current visitor to what the agent now knows
+                let currentVisitor = localStorage.getItem('visitor')
+                document.getElementById("currentVisitorId").innerText = currentVisitor;
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End identify Section -->
+    <!-- ======= clickEvents Section ======= -->
+    <section id="clickEvents" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3>Feature Tagging & <span>Click Events</span></h3>
+          <p>things to add here and in features below the big boxes: buttons, modal, disappearing and/or hidden elemnts,
+            nth children, card containers where the :contains text is a sibling, custom html elements, dynamic ids
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title">I'm Dynamic!</h4>
+              <p class="description">How can you tag me when my ID changes with every page load?</p><br>
+              <button type="button" class="btn btn-primary dynamicIds" onclick='whatsMyIdNow();'>Launch me!</button>
+            </div>
+            <script>
+              function whatsMyIdNow() {
+                alert("Hello! My ID is currently " + document.getElementsByClassName('dynamicIds')[0].id);
+              }
+            </script>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title">Modal</h4>
+              <p class="description">How to tag things in a modal? I am so sorry for how bad this modal is.</p><br>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch me!
+              </button>
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hello, I'm a modal model.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <center>
+                      I am the very model of a modern major modal.<br>
+                      I can hold anything, all elements at my disposal.<br>
+                      No one wants me to continue rappin'<br>
+                      So click my buttons to see what happens<br><br>
+                      <button type="button" class="btn btn-primary" id="modalButton" onclick="easyModalButton()">I'm
+                        easy! I have an
+                        ID.</button>
+                      <button type="button" class="btn btn-secondary" onclick="genericModalButton()">I'm pretty
+                        generic</button>
+
+                      <p id="clickResult"></p>
+                    </center>
+                    <script>
+                      function easyModalButton() { document.getElementById("clickResult").innerHTML = "Are you scared of the hard one?"; }
+                    </script>
+                    <script>
+                      function genericModalButton() { document.getElementById("clickResult").innerHTML = "Go easy on yourself, dude."; }
+                    </script>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title"><a href="">Sibling Rivalry</a></h4>
+              <p class="description">Write a :contains rule for ONLY this suspiciously familiar button.</p><br>
+              <button type="button" class="btn btn-primary">Launch me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title"><a href="">I'm sure I'm not a trap.</a></h4>
+              <p class="description">Just tag me, a simple button, and generate some events.</p><br>
+              <button type="button" class="btn btn-primary" id="notATrap">Launch me!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- End clickEvents Section -->
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-6 col-6">
+            <div class="icon-box">
+              <i class="ri-store-line" style="color: #ffbb2c;"></i>
+              <h3><a href="">Lorem Ipsum</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6">
+            <div class="icon-box">
+              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+              <h3><a href="">Dolor Sitema</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-md-0">
+            <div class="icon-box">
+              <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+              <h3><a href="">Sed perspiciatis</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
+            <div class="icon-box">
+              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
+              <h3><a href="">Magni Dolores</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-database-2-line" style="color: #47aeff;"></i>
+              <h3><a href="">Nemo Enim</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+              <h3><a href="">Eiusmod Tempor</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
+              <h3><a href="">Midela Teren</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
+              <h3><a href="">Pira Neve</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-anchor-line" style="color: #b2904f;"></i>
+              <h3><a href="">Dirada Pack</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-disc-line" style="color: #b20969;"></i>
+              <h3><a href="">Moton Ideal</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-base-station-line" style="color: #ff5828;"></i>
+              <h3><a href="">Verdo Park</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
+              <h3><a href="">Flavor Nivelanda</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Features Section -->
+    <!-- ======= Pages Section ======= -->
+    <section id="pages" class="pages anchor">
+      <div class="container">
+        <div class="text-center">
+          <h3>Multiple pages in a single-page world</h3>
+          <p> How could you tag the different sections of this app as if they were pages?</p>
+          <p> Can you tag this button and ONLY this button?</p>
+          <button type="button" class="btn btn-primary">Launch me!</button>
+        </div>
+      </div>
+    </section>
+    <!-- End pages Section -->
+    <!-- ======= wackyCSS Section ======= 
+    <section id="wackyCSS" class="wackyCSS">
+      <div class="container">
+        <div class="section-title">
+          <h2>wackyCSS</h2>
+          <h3>Check our <span>wackyCSS</span></h3>
+          <p>This would probably be a good place for the modals and siblings</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="wackyCSS-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row wackyCSS-container">
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-app">
+            <img src="assets/img/pineapplePizza.jpeg" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Pineapple on Pizza</h4>
+              <p>An Abomination</p>
+              <a href="assets/img/pineapplePizza.jpeg" data-gallery="wackyCSSGallery"
+                class="wackyCSS-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-web">
+            <img src="assets/img/chancla.gif" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Web 3</h4>
+              <p>Web</p>
+              <a href="assets/img/chancla.gif" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Web 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-app">
+            <img src="assets/img/bajaBlast.png" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>App 2</h4>
+              <p>App</p>
+              <a href="assets/img/bajaBlast.png" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="App 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-card">
+            <img src="assets/img/kermit.png" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Card 2</h4>
+              <p>Card</p>
+              <a href="assets/img/kermit.png" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Card 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-web">
+            <img src="assets/img/raccoonLisa.png" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Web 2</h4>
+              <p>Web</p>
+              <a href="assets/img/raccoonLisa.png" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Web 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-app">
+            <img src="assets/img/pinkSalt.jpeg" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>App 3</h4>
+              <p>App</p>
+              <a href="assets/img/pinkSalt.jpeg" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="App 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-card">
+            <img src="assets/img/smashKarts.jpeg" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Card 1</h4>
+              <p>Card</p>
+              <a href="assets/img/smashKarts.jpeg" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Card 1"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-card">
+            <img src="assets/img/pendo.jpeg" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Card 3</h4>
+              <p>Card</p>
+              <a href="assets/img/pendo.jpeg" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Card 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wackyCSS-item filter-web">
+            <img src="assets/img/cheese.png" class="img-fluid" alt="">
+            <div class="wackyCSS-info">
+              <h4>Web 3</h4>
+              <p>Web</p>
+              <a href="assets/img/cheese.png" data-gallery="wackyCSSGallery" class="wackyCSS-lightbox preview-link"
+                title="Web 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ End wackyCSS Section -->
+    <!-- ======= noIds Section ======= -->
+    <section id="noIds" class="noIds">
+      <div class="container">
+        <div class="section-title">
+          <h2>No IDs</h2>
+          <h3>How can you tag <span>identical elements?</span></h3>
+          <p>Come up with a way to tag these creepy siblings.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>We're all the same</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>except our text.</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>How on earth</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>can you tag us?</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <script>
+            function buttonChange(element, color) {
+              element.style.background = color;
+            }
+          </script>
+        </div>
+      </div>
+    </section>
+    <!-- End noIds Section -->
+    <!-- ======= clickEventProps Section ======= -->
+    <section id="clickEventProps" class="clickEventProps anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Click Event Properties</h2>
+          <h3>Capturing <span>All the Things!</span></h3>
+          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae
+            autem.
+          </p>
+        </div>
+        <div>
+          <iframe style="border:0; width: 100%; height: 270px;"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.436286213318!2d-78.67799278670283!3d35.78922124862901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89acf5950e26af39%3A0x10e025267106123!2sCup%20A%20Joe!5e0!3m2!1sen!2sus!4v1709828782963!5m2!1sen!2sus"
+            frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>1630 Revello Drive, Sunnydale CA</p>
+              </div>
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>buffy@slayer.biz</p>
+              </div>
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+1 123 581 3213 ext 4</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 mt-5 mt-lg-0">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End clickEventProps Section -->
+    <!-- ======= trackEvents Section ======= -->
+    <section id="trackEvents" class="trackEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>trackEvents</h2>
+          <h3>What if there are <span>no clicks?!</span></h3>
+          <p>Sometimes you want to track things that aren't linked directly to a click.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="box">
+              <h3>How to capture the search when you hit enter?!?</h3>
+              <input type="text" id="searchField" placeholder="enter whatever you want">
+              <h5 id="result"></h5>
+              <script>
+                const input = document.querySelector('#searchField');
+
+                input.addEventListener('keydown', (event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault(); // prevent default behavior
+                    pendo.track("Search Term", { // send the track event
+                      searchTerm: document.getElementById('searchField').value,
+                      screenWidth: JSON.stringify(window.innerWidth),
+                      screenHeight: JSON.stringify(window.innerHeight)
+                    });
+                    document.getElementById("result").innerText = "Submitted!";
+                  }
+                });
+              </script>
+            </div>
+          </div>
+          <!--<<div class="col-lg-4 col-md-6">
+            <div class="box">
+              h3>I want to know what option the user has selected below:</h3>
+               <h4><sup>$</sup>0<span> / month</span></h4>
+
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>Plz choose an option, thx</option>
+                <option value="1">No</option>
+                <option value="2">Nuh-uh</option>
+                <option value="3">meh, sure</option>
+              </select>\
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                  onclick="myFunction()">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Feature A</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Feature B</label>
+              </div> 
+              <script>
+                function myFunction() {
+                  const node = document.getElementById("flexSwitchCheckDefault");
+                  node.replaceWith(node.cloneNode(true));
+                }
+              </script>
+            </div>
+          </div>-->
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended">
+              <h3>Which floof gets dropped in the box?</h3>
+              <div style="display: flex;">
+                <div style="flex: 33.33%; padding: 5px;">
+                  <img id="catFloof" src="assets/img/cat.png" draggable="true" ondragstart="drag(event)" height="100">
+                  <img id="dogFloof" src="assets/img/dog.png" draggable="true" ondragstart="drag(event)" height="100">
+                </div>
+              </div>
+              <br>
+              <div style="margin: auto;" id="getData" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="recommended-badge">THE BEST</span>
+              </div>
+              <script>
+                function allowDrop(even) {
+                  even.preventDefault();
+                }
+
+                function drag(even) {
+                  even.dataTransfer.setData("text", even.target.id);
+                }
+
+                function drop(even) {
+                  even.preventDefault();
+                  var fetchData = even.dataTransfer.getData("text");
+                  even.target.appendChild(document.getElementById(fetchData));
+                  pendo.track("Floof Drop", {
+                    theBestFloof: fetchData,
+                    screenWidth: JSON.stringify(window.innerWidth),
+                    screenHeight: JSON.stringify(window.innerHeight)
+                  });
+                }
+              </script>
+            </div>
+          </div>
+          <!--           <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended">
+              <span class="recommended-badge">Recommended</span>
+              <h3>Here's another dropdown</h3>
+              <h4><sup>it's very</sup>important<span> to me</span></h4>
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>This is the most important one</option>
+                <option value="1">No this one!</option>
+                <option value="2">This is the more important one</option>
+                <option value="3">How can you pick those others</option>
+                <option value="4">When I'm right here</option>
+              </select>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div> -->
+          <!--           <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>Here's another; do you like:</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>Flowers</option>
+                <option value="1">Fungi</option>
+                <option value="2">Metal</option>
+                <option value="3">Lace</option>
+                <option value="3">Rocks</option>
+              </select>
+              
+          </div> -->
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>How long does it take an upload to complete?</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               -->
+              <div id="Progress_Status">
+                <div id="myprogressBar"></div>
+              </div>
+
+              <br>
+              <button class="btn-buy" onclick="update()">Start Upload</button>
+
+              <script>
+                function update() {
+                  var element = document.getElementById("myprogressBar");
+                  var width = 1;
+                  var randomTime = Math.floor(Math.random() * 100);
+                  console.log(randomTime)
+                  var identity = setInterval(scene, randomTime);
+                  function scene() {
+                    if (width >= 100) {
+                      clearInterval(identity);
+                      pendo.track("Upload time", {
+                        timeInMs: randomTime,
+                        screenWidth: JSON.stringify(window.innerWidth),
+                        screenHeight: JSON.stringify(window.innerHeight)
+                      });
+                    } else {
+                      width++;
+                      element.style.width = width + '%';
+                      element.innerHTML = width * 1 + '%';
+                    }
+                  };
+                }
+              </script>
+
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End trackEvents Section -->
+    <!-- ======= Console Commands Section ======= -->
+    <section id="consoleCommands" class="consoleCommands anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>F.U.C.C.</h2>
+          <h3>Frequent(ish) Used <span>Console Commands</span></h3>
+          <p>We all know validateInstall, but do you know these?</p>
+          <p>Open up the Console in dev tools and try these out!
+          </p>
+        </div>
+        <ul class="consoleCommands-list">
+          <li>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#consoleCommands1">How can you get a list of
+              guide NAMES available on this page? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands1" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                pendo._.pluck(pendo.guides,"name")
+              </p>
+            </div>
+          </li>
+          <li>
+            <div data-bs-toggle="collapse" href="#consoleCommands2" class="collapsed question">How do you know which
+              element is getting a click? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands2" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                window.addEventListener('click', (e) => console.log(e));
+              </p>
+            </div>
+          </li>
+          <li>
+            <div data-bs-toggle="collapse" href="#consoleCommands3" class="collapsed question">How can you identify a
+              new visitor via the console? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands3" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                pendo.identify({"visitor": {"id": "visitorId"},"account": {"id": "accountId"}})
+              </p>
+            </div>
+          </li>
+          <li>
+            <div data-bs-toggle="collapse" href="#consoleCommands4" class="collapsed question">Ac odio tempor orci
+              dapibus. Aliquam
+              eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands4" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id
+                donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit
+                ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div data-bs-toggle="collapse" href="#consoleCommands5" class="collapsed question">Tempus quam pellentesque
+              nec nam
+              aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands5" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc
+                vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus
+                gravida quis blandit turpis cursus in
+              </p>
+            </div>
+          </li>
+          <li>
+            <div data-bs-toggle="collapse" href="#consoleCommands6" class="collapsed question">Tortor vitae purus
+              faucibus ornare.
+              Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i
+                class="bi bi-chevron-up icon-close"></i>
+            </div>
+            <div id="consoleCommands6" class="collapse" data-bs-parent=".consoleCommands-list">
+              <p>
+                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada
+                nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis
+                tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas
+                fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- End F.A.Q Section -->
+  </main>
+  <!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-clickEventProps">
+            <h3>Escalation Engineering</h3>
+            <p>
+              123 Grimace Drive <br>
+              Pendo, TS<br><br>
+              <strong>Phone:</strong> +1 123 581 3213 ext 4<br>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Answers</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Salt</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Salty Answers</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Check it out in Pendo!</h4>
+            <p>This is the single page site attached to:<br>
+              sub 5046634419191808 (TechSuccess_Demo)<br>
+              app 5442093541818368 (SinglePageApp)</p>
+            <div>
+              <a href="https://app.pendo.io/s/5046634419191808/" class="footer-btn">Take me there!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container d-md-flex py-4">
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Escalation Engineering</span></strong>. All Rights Revoked
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    // Source: http://stackoverflow.com/questions/30734552/change-url-while-scrolling
+    // stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+    function isElementInViewport(el) {
+      //special bonus for those using jQuery
+      if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+      }
+      var rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+      );
+    }
+    // click-to-scroll behavior
+    $(".anchor").click(function (e) {
+      e.preventDefault();
+      var section = this.href;
+      var sectionClean = section.substring(section.indexOf("#"));
+      $("html, body").animate({
+        scrollTop: $(sectionClean).offset().top
+      }, 1000, function () {
+        window.location.hash = sectionClean;
+      });
+    });
+    // listen for the scroll event
+    $(document).on("scroll", function () {
+      // check if the anchor elements are visible
+      $(".anchor").each(function (idx, el) {
+        if (isElementInViewport(el)) {
+          // update the URL hash
+          if (window.history.pushState) {
+            var urlHash = "#" + $(el).attr("id");
+            window.history.pushState(null, null, urlHash);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>
