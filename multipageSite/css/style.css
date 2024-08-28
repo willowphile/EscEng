@@ -402,6 +402,15 @@
     padding: 150px 0 50px 0;
 }
 
+.framedBg {
+    background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(../img/framed.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 150px 0 50px 0;
+}
+
 .selfHostedHeader {
     background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(../img/agentSmith.jpeg);
     background-position: center top;
