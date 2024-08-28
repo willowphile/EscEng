@@ -8,31 +8,31 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../singlePageApp/assets/img/favicon.png" rel="icon">
+    <link href="../singlePageApp/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../singlePageApp/assets/css/style.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="../singlePageApp/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../singlePageApp/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../singlePageApp/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../singlePageApp/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../singlePageApp/assets/vendor/php-email-form/validate.js"></script>
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../singlePageApp/assets/js/main.js"></script>
 
     <!-- =============================================================================================
     *** Don't worry about anything above this line! ***
@@ -48,7 +48,16 @@
                 y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
                 z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
             })(window, document, 'script', 'pendo');
-        })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');
+
+            pendo.initialize({
+                visitor: {
+                    id: localStorage.getItem('visitor')
+                },
+                account: {
+                    id: localStorage.getItem('account')
+                }
+            });
+        })('1a320afd-6992-47f3-4486-571abccd1b9c');
     </script>
 
 </head>
@@ -57,65 +66,13 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a> <a
+            <h1 class="logo"><img src="../singlePageApp/assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a> <a
                     href="index.html">Escalation Engineering</a>
-                <a href="index.html" class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a>
+                <a href="index.html" class="logo"><img src="../singlePageApp/assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a>
             </h1>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#home">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#identify">Identify</a></li>
-                    <li class="dropdown nav-link scrollto">
-                        <a href="#clickEvents"><span>Features</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#clickEvents">Feature Tagging</a></li>
-                            <li><a href="#pages">Moar Tricky Tagging</a></li>
-                            <li><a href="#clickEventProps">clickEventProps</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link scrollto" href="#trackEvents">Track Events</a></li>
-                    <li><a class="nav-link scrollto" href="#consoleCommands">Console Commands</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Other Sites</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li class="dropdown">
-                                <a href="multipageSite/index.html"><span>Multi-page app</span> <i
-                                        class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="multipageSite/index.html">Home</a></li>
-                                    <li><a href="#">Frames</a></li>
-                                    <li><a href="#">Location API</a></li>
-                                    <li><a href="#">JWT</a></li>
-                                    <li><a href="#">Anonymous only</a></li>
-                                    <li><a href="#">Broken CDN</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#"><span>Non-standard installations</span> <i
-                                        class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Segment</a></li>
-                                    <li><a href="#">GTM</a></li>
-                                    <li><a href="#">Self-hosted</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#"><span>Guide playground</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">NPS</a></li>
-                                    <li><a href="#">Tooltips everywhere</a></li>
-                                    <li><a href="#">Walkthrough 1</a></li>
-                                    <li><a href="#">Walkthrough 2</a></li>
-                                    <li><a href="#">Walkthrough 3</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Pizza CRM app</a></li>
-                            <li><a href="#">Alisyn's dumpster site</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="nav-link scrollto active" href="locationAPI.html">Return to Location API</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -124,7 +81,7 @@
     </header>
 
     <!-- ======= "home" section with description.  nothing fancy here. ======= -->
-    <section id="home" class="anchor">
+    <section id="home" class="anchor" style="background: url('img/spacecat.svg') top center; background-size: cover;">
         <div class="home-container">
             <h3><strong>Location API in Practice!</strong></h3>
             <h2></h2>
