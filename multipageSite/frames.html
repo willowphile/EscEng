@@ -45,6 +45,7 @@
             justify-content: center;
             /* Centers the <a> element within its div */
             width: 100%;
+            max-width: 30%;
         }
     </style>
 
@@ -66,7 +67,8 @@
                 },
                 account: {
                     id: localStorage.getItem('account')
-                }
+                },
+                excludeAllText: true
             });
         })('1a320afd-6992-47f3-4486-571abccd1b9c');
     </script>
@@ -132,12 +134,7 @@
     <!-- Header Start -->
     <div class="container-fluid framedBg">
         <div class="container text-center py-5" style="max-width: 900px;">
-            <h3 class="text-white display-3 mb-4">About Us</h1>
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active text-white">About</li>
-                </ol>
+            <h3 class="text-white display-3 mb-4">Welcome to Tagging Jail</h1>
         </div>
     </div>
     <!-- Header End -->
@@ -149,19 +146,17 @@
                 <h5 class="section-title px-3">Yep more buttons</h5>
                 <h1 class="mb-0">You've been FRAMED</h1>
                 <p>...and the only way to prove your innocence is to tag these buttons below.<br>
-                    The catch is you must use page-specific tags but WITHOUT any <code>:contains()</code></p>
+                    The catch is you must use page-specific tags. Good luck trying to use <code>:contains()</code></p>
             </div>
-            <div class="col-lg-5">
-                <div class="row gy-2 gx-4 mb-4 frames">
-                    <div>
-                        <iframe src="frame1.html"></iframe>
-                    </div>
-                    <div>
-                        <iframe src="frame2.html"></iframe>
-                    </div>
-                    <div class="notAFrame">
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2">Don't forget meeeeeeee</a>
-                    </div>
+            <div class="row gy-2 gx-4 mb-4 frames">
+                <div style="max-width: 30%;">
+                    <iframe src="frame1.html"></iframe>
+                </div>
+                <div style="max-width: 30%;">
+                    <iframe src="frame2.html"></iframe>
+                </div>
+                <div class="notAFrame">
+                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-2">Don't forget meeeeeeee</a>
                 </div>
             </div>
         </div>
