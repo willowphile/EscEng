@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING UNTIL THE NEXT COMMENT BLOCK LIKE THIS
+     +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+    <meta charset="utf-8">
+    <title>Basic Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING ABOVE THIS COMMENT BLOCK
+     +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+
+
+    <!-- PENDO SNIPPET GOES HERE -->
+    <!-- You could hard code value, use variables defined elsewhere, or even pull from local storage -->
+
+</head>
+
+
+<body>
+
+    <!-- Spinner Start --> <!-- You can ignore this -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="../singlePageApp/assets/img/dumpster-fire.gif">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="../index.html" class="nav-item nav-link">Back to main EE site</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid jwtHeader">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="text-white display-3 mb-4">This is your header</h1>
+                <p class="text-center text-white mb-5">This is some other text.</p>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Main Body - White section -->
+    <div class="container-fluid selfHosted py-5">
+        <div class="container py-5" id="sectionOne">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Click and tag and target</h5>
+                <p>You can make this page anything you like.<br> When you open the superBasicTemplate.html file, you can ignore most of the code.<br>
+                 There's a lot of random bootstrap stuff that's just for appearances.<br>
+            Pay attention to the Pendo Snippet, Header, and Main Body sections marked by comments.</p>
+            </div>
+            <div class="row g-4" style="display: flex; justify-content: center; align-items: center;">
+
+                <div class="col-lg-9">
+                    <div class="text-center">
+                        <p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" id="fakeButton">This is kinda a
+                            button?</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- JWT Login End -->
+
+    <!-- Main Body - Blue Section -->
+    <div class="container-fluid selfHostedBanner2 py-5">
+        <div class="container text-center py-5">
+            <div class="mx-auto text-center" style="max-width: 900px;">
+                <div class="position-relative mx-auto">
+                    <input id="searchBar" name="aWildTextBoxAppears" class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5"
+                        type="text" placeholder="this would be a good place for a click event property">
+                    <button type="button" name="realLifeButton" onclick="buttonClicked()"
+                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Click
+                        me!</button>
+                    <p class="text-white" id="buttonClicked"></p>
+                    <script type="text/javascript">
+                        function buttonClicked() {
+                            document.getElementById("buttonClicked").innerText = "You clicked it!"
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subscribe End -->
+
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING BELOW THIS LINE
+    +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright text-body py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-12 text-center=">
+                    <img src="img/eeIcon.png" style="max-width: 75px;">Brought to you by Escalation Engineering. Site
+                    template designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
