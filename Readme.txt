@@ -8,7 +8,7 @@ To run this site yourself, a.k.a. on "staging", set up your localhost.
 - Run the command: python3 -m http.server 8080
 - In your browser, navigate to localhost:8080.
 
-Be sure to use either Git Desktop or run ```git pull``` in the terminal to ensure you have the most recent version of the site
+Be sure to use either Git Desktop or run `git pull` in the terminal to ensure you have the most recent version of the site
 
 
 To make a copy of this for you to reassociate to your own sub's API Key, follow the directions below.
