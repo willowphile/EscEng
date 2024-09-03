@@ -1409,6 +1409,21 @@ section {
   background: #fff;
 }
 
+.clickEventProps .php-email-form input[type=checkbox] {
+  height: 15px;
+}
+
+#explainYourself {
+  display: none;
+}
+
+
+
+.clickEventProps .php-email-form input[type=radio] {
+  height: 15px;
+  border-radius: 50%;
+}
+
 .clickEventProps .php-email-form .form-group {
   padding-bottom: 8px;
 }
