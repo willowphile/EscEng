@@ -427,6 +427,15 @@
     padding: 150px 0 50px 0;
 }
 
+.shadowDomHeader {
+    background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(../img/shadowDomHeader.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 150px 0 50px 0;
+}
+
 .bg-breadcrumb .breadcrumb-item a {
     color: var(--bs-secondary) !important;
 }
@@ -918,6 +927,14 @@
     
 }
 
+.bookingShadow {
+    background: linear-gradient(rgba(19, 53, 123, .8), rgba(19, 53, 123, .8)), url(../img/shadowDomHeader.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
 
 .booking .container .section-booking-title {
     position: relative;
@@ -1236,7 +1253,15 @@
 
 /*** Subscribe Start ***/
 .subscribe {
-    background: linear-gradient(rgba(19, 53, 123, .6), rgba(19, 53, 123, .6)), url(../img/subscribe-img.jpg);
+    background: linear-gradient(rgba(19, 53, 123, .6), rgb(19, 54, 123)), url(../img/subscribe-img.jpg);
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.subscribeShadow {
+    background: rgb(19, 53, 123);
     background-attachment: fixed;
     background-position: center top;
     background-repeat: no-repeat;
