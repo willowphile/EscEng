@@ -1413,15 +1413,43 @@ section {
   height: 15px;
 }
 
-#explainYourself {
+#explainYourself, #explainYourself2 {
   display: none;
 }
 
+.form-check-input:checked + .form-check-label {
+  background: blue;
+  color:white;
+}
 
+.form-check-label {
+  background: white;
+  border-style: solid !important;
+  border: 2px;
+  border-color: blue;
+  padding: 5px 28px;
+  color: blue;
+  transition: 0.4s;
+  border-radius: 5px;
+}
 
-.clickEventProps .php-email-form input[type=radio] {
-  height: 15px;
-  border-radius: 50%;
+.radioLabel {
+  background: white;
+  border-style: solid !important;
+  border: 2px;
+  border-color: blue;
+  padding: 5px 28px;
+  color: blue;
+  transition: 0.4s;
+  border-radius: 5px;
+}
+.form-check-input:checked + .radioLabel {
+  background: blue;
+  color:white;
+}
+
+#radioFlyer, #radioHead, #radio881, #radioShack {
+  opacity:0;
 }
 
 .clickEventProps .php-email-form .form-group {
