@@ -142,13 +142,14 @@
                 <div class="navbar-nav ms-auto py-0">
                     <a href="../index.html" class="nav-item nav-link">Portal</a>
                     <a href="frames.html" class="nav-item nav-link">Frames</a>
-                    <a href="locationAPI.html" class="nav-item nav-link active">Shadow Dom</a>
+                    <a href="locationAPI.html" class="nav-item nav-link active">Location API</a>
                     <a href="csp.html" class="nav-item nav-link">CSP</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Special Installs</a>
                         <div class="dropdown-menu m-0">
                             <a href="jwt.html" class="dropdown-item">JWT</a>
                             <a href="selfHosted.html" class="dropdown-item">selfHosted</a>
+                            <a href="shadowdom.html" class="dropdown-item  ">Shadow Dom</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -182,12 +183,6 @@
             <h1 class="text-white display-3 mb-4">(Don't Fear) The Shadow DOM</h1>
         </div>
         <div class="mx-auto text-center" style="max-width: 900px;">
-            <p class="text-white mb-4">
-                Apps use the shadow DOM to create reusable components that are not affected by js and css running on the page. It makes it simpler for customers' devs to reuse these components across their app without worrying about conflicts.
-            </p>
-            <p class="text-white mb-4">
-                As such, this functionality presents a few unique but straightforward challenges for tagging and guide targeting in pendo.
-            </p>
             <p class="text-white mb-4">The button below links to an MDN article describing more about the shadow DOM
             </p>
         </div>
@@ -204,228 +199,62 @@
     <!-- Shadow Dom Start -->
 
     <div class="container-fluid bookingShadow py-5 shadowDom">
-        <p>
-            I'd expect the below button to be in a shadow root
-        </p>
-        <div id="attachShadow">
+        <div class="mx-auto text-center mb-5 text-white" style="max-width: 900px;">
+            <h2>
+                Things to know before you start
+            </h2>
+            <p class="text-white mb-4"></p>
+                Apps use the shadow DOM to create reusable components that are not affected by js and css running on the page. It makes it simpler for customers' devs to reuse these components across their app without worrying about conflicts.
+            </p>
+            <p class="text-white mb-4"></p>
+                As such, this functionality presents a few unique but straightforward challenges for tagging and guide targeting in pendo.
+            </p>
+            <p text-white mb-4>
+                I'd expect the below button to be in a shadow root
+            </p>
         </div>
 
-    </div>
+        <div class="text-center" id="attachShadow">
+        </div>
 
-    <div class="container-fluid bookingShadow py-5 shadowDom">
-        <div class="container py-5">
-            <!-- addTransforms start -->
-            <div class="row g-5 align-items-center addTransforms">
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-4">addTransforms</h1>
-                    <p class="text-white mb-4">The addTransforms() function allows you to change all or part of a
-                        URL.<br>It takes three inputs:
-                    <pre><code style="color:white;">
-{
-    'attr': 'what part of the url do you want to change',
-    'action': 'in what way do you want to change it',
-    'data': 'what value do you want to use'
-}
-                                </code></pre>
-                    </p>
-                    <p class="text-white mb-4">Multiple changes can be invoked in a single addTransforms by using a list
-                        of objects:
-                    <pre><code style="color:white;">
-pendo.location.addTransforms([
-    {
-        'attr': 'pathname',
-        'action': 'Replace',
-        'data': 'cats/are/the/best'
-    },
-    {
-        'attr': 'search',
-        'action': 'ExcludeKeys',
-        'data': ['email', 'someOtherPII']; 
-    }
-]);
-        </code></pre>
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-3">Test it!</h1>
-                    <div>
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <select class="form-select bg-white border-0" id="attr" name="attr"
-                                        onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
-                                        <option value="">Select attr</option>
-                                        <option value="search">search</option>
-                                        <option value="hash">hash</option>
-                                        <option value="pathname">pathname</option>
-                                        <option value="hostname">hostname</option>
-                                        <option value="href">href</option>
-                                        <option value="protocol">protocol</option>
-                                    </select>
-                                    <label for="SelectPerson">attr</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <script type="text/javascript" language="JavaScript">
-                                        document.write('<select name="action" class="form-select bg-white border-0" id="action"><option value="">Choose attr first</option></select>')
-                                    </script>
-                                    <noscript>
-                                        <select class="form-select bg-white border-0" id="action" name="action">
-                                        </select>
-                                    </noscript>
-                                    <label for="CategoriesSelect">action</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control bg-white border-0" id="data"
-                                        style="height: 65px"></textarea>
-                                    <label for="data" id="dataLabel">data</label>
-                                </div>
-                            </div>
-                            <div>
-                                <button onclick="updateUrl2()" class="btn btn-primary text-white w-100 py-3"
-                                    id="addTransformsButton">Update</button>
-                                <script type="text/javascript">
-                                    function updateUrl2() {
-                                        var $items = $('#attr, #action,#data')
-                                        var obj = {}
-                                        $items.each(function () {
-                                            obj[this.id] = $(this).val();
-                                        })
-                                        // change the URL
-                                        pendo.location.addTransforms([obj]);
+        <div class="mx-auto text-center mb-5 text-white" style="max-width: 900px;">
+            <h2>
+                Is the shadow root open or closed?
+            </h2>
+            <p class="text-white mb-4"></p>
+                Some info about mode closed vs open. 
+            </p>
+            <p class="text-white mb-4"></p>
+                more. text.
+            </p>
+        </div>
+        
+        <div class="mx-auto text-center mb-5 text-white" style="max-width: 900px;">
+            <h2>
+                Custom HTML Elements
+            </h2>
+            <p class="text-white mb-4"></p>
+                The shadow dom is not the only way to create custom html elements, but is a good way to create custom elements that won't break due to a page's css or js because of the encapsulation it provides. 
+            </p>
+            <p class="text-white mb-4"></p>
+                more. text.
+            </p>
+        </div>
 
-                                        // show on screen
-                                        setTimeout(() => {
-                                            var json = JSON.stringify(obj);
-                                            var transformedUrl = pendo.getNormalizedUrl();
-
-                                            document.getElementById("selectionCombo").innerText = "Your code & new URL: ";
-                                            $('#helperText').replaceWith('<div id="transformResult"><pre><code style="color:white;">' + JSON.stringify(obj, null, ' '));
-                                            $('#transformResult').append('<h5><code style="color:white;">' + transformedUrl)
-                                        }, 1000);
-
-                                        $('#addTransformsButton').replaceWith('<a class="btn btn-primary text-white w-100 py-3" onClick="window.location.reload()">Clear choices for new test</a>');
-
-                                    }
-                                </script>
-                            </div>
-                            <div class="col-12">
-                                <hr id="disappearingLine" style="color:white; height: 2px; opacity: 0;">
-                                <h4 class="text-white pe-3" id="selectionCombo"></h4>
-                                <p class="text-white mb-4" id="helperText"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div><br>
-                <hr style="color:white; height: 2px; opacity: .50;">
-            </div>
-            <!-- addTransforms end -->
-
-
-            <!-- clearTransforms start -->
-            <div class="row g-5 align-items-center clearTransforms">
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-4">clearTransforms</h1>
-                    <p class="text-white mb-4">Use clearTransforms to undo any existing changes. Nothing is passed into
-                        the function.</p>
-                </div>
-                <div class="col-lg-6">
-                    <h1 class="text-white" style="margin-bottom: 0;">Test it!</h1><i class="text-white">hint: do an
-                        addTransforms first</i>
-                    <button onclick="clearTransforms()" class="btn btn-primary text-white w-100 py-3"
-                        id="clearTransforms">Update</button>
-                    <script type="text/javascript">
-                        function clearTransforms() {
-                            pendo.location.clearTransforms();
-                            console.log("transforms cleared. URL is now: " + pendo.location.getHref());
-                        }
-                    </script>
-
-                </div>
-            </div>
-            <div><br>
-                <hr style="color:white; height: 2px; opacity: .50;">
-            </div>
-            <!-- clearTransforms end -->
-
-
-            <!--  start -->
-            <div class="row g-5 align-items-center setUrl">
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-4">setUrl</h1>
-                    <p class="text-white mb-4">Use setUrl() to completely replace the browser's url.When using this,
-                        <span class="text-warning">you must include the full URL</span>, i.e.
-                        https://www.geocities.com/underConstruction
-                    <p class="text-white mb-4"></p>
-                    <p class="text-white mb-4">This can be added to the snippet or tied to a particular action on the
-                        page. For this example, it is tied to the click of the Update button.</p>
-                </div>
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-3">Test it!</h1>
-                    <div>
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control bg-white border-0" placeholder="Special Request"
-                                        id="setUrlTo"></textarea>
-                                    <label for="setUrlTo">Enter a whoooole new URL. Don't forget the https://</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button onclick="updateUrl()" class="btn btn-primary text-white w-100 py-3"
-                                    id="updateUrlButton">Update</button>
-                                <script type="text/javascript">
-                                    function updateUrl() {
-                                        var urlVal = document.getElementById("setUrlTo").value;
-                                        pendo.location.setUrl(urlVal);
-                                        console.log("URL has been updated to " + pendo.location.getHref());
-                                    }
-                                </script>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div><br>
-                <hr style="color:white; height: 2px; opacity: .50;">
-            </div>
-            <!-- setUrl end -->
-
-
-            <!--  start -->
-            <div class="row g-5 align-items-center useBrowserUrl">
-                <div class="col-lg-6">
-                    <h1 class="text-white mb-4">useBrowserUrl</h1>
-                    <p class="text-white mb-4">Use useBrowserUrl to undo setUrl and default back to the browser URL. Nothing is passed into
-                        the function.</p>
-                </div>
-                <div class="col-lg-6">
-                    <h1 class="text-white" style="margin-bottom: 0;">Test it!</h1><i class="text-white">hint: do setUrl first</i>
-                    <button onclick="useBrowserUrl()" class="btn btn-primary text-white w-100 py-3"
-                        id="useBrowserUrl">Update</button>
-                    <script type="text/javascript">
-                        function useBrowserUrl() {
-                            pendo.location.useBrowserUrl();
-                            console.log("URL reset to " + pendo.location.getHref());
-                        }
-                    </script>
-
-                </div>
-            </div>
-            <div><br>
-                <hr style="color:white; height: 2px; opacity: .50;">
-            </div>
-            <!-- useBrowserUrl end -->
-
-
+        <div class="mx-auto text-center mb-5 text-white" style="max-width: 900px;">
+            <h2>
+                I'd like this section to allow users to create their own element in the shadow dom
+            </h2>
+            <p class="text-white mb-4"></p>
+                form?
+            </p>
+            <p class="text-white mb-4"></p>
+                more. text.
+            </p>
         </div>
     </div>
+
+  
     <!-- Tour Booking End -->
 
     <!-- Documentation Link Start -->
