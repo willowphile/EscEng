@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING UNTIL THE NEXT COMMENT BLOCK LIKE THIS
+     +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+    <meta charset="utf-8">
+    <title>Basic Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING ABOVE THIS COMMENT BLOCK
+     +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+
+
+    <style>
+        .headerSection {
+            background: linear-gradient(rgba(19, 53, 123, 0.5), rgba(19, 53, 123, 0.5)), url(img/jwtImage.gif);
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 150px 0 50px 0;
+        }
+
+        h1 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #f9a825, #ff5722);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+    <!-- SNIPPET GOES HERE -->
+    <!-- You could hard code values, use variables defined elsewhere, or even pull from local storage -->
+
+</head>
+
+<body>
+    <!-- Spinner Start --> <!-- You can ignore this -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start --> <!-- You can ignore this unless you wanna set up a navbar for yourself-->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="../singlePageApp/assets/img/dumpster-fire.gif">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="../index.html" class="nav-item nav-link">Back to main EE site</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <!-- To change your header image, change .headerSection in the style section above -->
+    <div class="container-fluid headerSection">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="text-white display-3 mb-4">This is your header</h1>
+                <p class="text-center text-white mb-5">This is some other text.</p>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Main Body - White section -->
+    <div class="container-fluid py-5">
+        <div class="container py-5" id="sectionOne">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h1 class="px-3">Super Generic Page 4000</h1>
+                <h5 class="section-title px-3">Click and tag and target <span style="color:purple !important">all the
+                        things</span></h5>
+                <div class="row g-4" style="display: flex; justify-content: center; align-items: center;">
+                    <div class="col-9">
+                        <p class="text-start">This is an experiment to see if i can make a page to simulate a guide
+                            payload
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-5 align-items-center "
+                style="display: flex; justify-content: center; align-items: center;">
+                <div class="col-lg-6">
+                    <form>
+                        <div class="form-group">
+                            <label for="visitorId">visitorId</label>
+                            <input type="text" class="form-control" id="visitorId" name="genericInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="accountId">accountId</label>
+                            <input type="text" class="form-control" id="accountId" name="genericInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="url">url</label>
+                            <input type="text" class="form-control" id="url" name="genericInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="agentVersion">agentVersion</label>
+                            <input type="text" class="form-control" id="agentVersion" name="genericInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="apiKey">apiKey</label>
+                            <input type="text" class="form-control" id="apiKey" name="genericInput">
+                        </div>
+                        <div class="form-group">
+                            <label for="region">region</label>
+                            <input type="text" class="form-control" id="region" name="genericInput">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    output the json here i guess?
+                </div>
+            </div>
+            <div class="row g-5 align-items-center "
+                style="display: flex; justify-content: center; align-items: center;">
+                <div class="col-lg-6">
+                    <form id="myForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name">
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+
+                        <button type="button" onclick="generateJSON()">Generate JSON</button>
+                    </form>
+                    <script>
+                        function generateJSON() {
+                            const form = document.getElementById('myForm');
+                            const formData = new FormData(form);
+                            const jsonData = {};
+
+                            for (const [key, value] of formData.entries()) {
+                                jsonData[key] = value;
+                            }
+
+                            document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
+                        }
+                    </script>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <pre id="jsonOutput"></pre>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown with navigation
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">This scrolls to the top</a>
+                            <a class="dropdown-item" href="../index.html">This is a link to the portal</a>
+                            <a class="dropdown-item" href="https://app.pendo.io/s/5046634419191808">This goes to the
+                                Pendo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div>
+                        <button type="button" class="btn btn-secondary" value="moar">Moar</button>
+                        <button type="button" class="btn btn-success">Buttons</button>
+                        <button type="button" class="btn btn-danger" name="allRightallRight">Right</button>
+                        <button type="button" class="btn btn-warning">Here</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Body - White section End -->
+
+    <!-- Main Body - Blue Section -->
+    <div class="container-fluid selfHostedBanner2 py-5">
+        <div class="container text-center py-5">
+            <div class="mx-auto text-center" style="max-width: 900px;">
+                <div class="position-relative mx-auto">
+                    <input id="searchBar" name="aWildTextBoxAppears"
+                        class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                        placeholder="this would be a good place for a click event property">
+                    <button type="button" name="realLifeButton" onclick="buttonClicked()"
+                        class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Click
+                        me!</button>
+                    <p class="text-white" id="buttonClicked"></p>
+                    <script type="text/javascript">
+                        function buttonClicked() {
+                            document.getElementById("buttonClicked").innerText = "You clicked it!"
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Body - Blue Section End -->
+
+    <!--+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+           IGNORE EVERYTHING BELOW THIS LINE
+    +_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+-->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright text-body py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-12 text-center=">
+                    <img src="img/eeIcon.png" style="max-width: 75px;">Brought to you by Escalation Engineering.
+                    Site
+                    template designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
