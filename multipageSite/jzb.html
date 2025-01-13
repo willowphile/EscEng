@@ -89,9 +89,9 @@
     <!-- Header Start -->
     <!-- To change your header image, change .headerSection in the style section above -->
     <div class="container-fluid headerSection">
-        <div class="container text-center py-5" style="max-width: 900px;">
-            <h3 class="text-white display-3 mb-4">This is your header</h1>
-                <p class="text-center text-white mb-5">This is some other text.</p>
+        <div class="container text-center py-5" style="max-width: 1200px;">
+            <h3 class="text-white display-3 mb-4">Generate a test guide payload</h1>
+                <p class="text-center text-white mb-5"></p>
         </div>
     </div>
     <!-- Header End -->
@@ -100,13 +100,11 @@
     <div class="container-fluid py-5">
         <div class="container py-5" id="sectionOne">
             <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                <h1 class="px-3">Super Generic Page 4000</h1>
-                <h5 class="section-title px-3">Click and tag and target <span style="color:purple !important">all the
-                        things</span></h5>
+                <h1 class="px-3">Choose your own adventure!</h1>
+                <h5 class="section-title px-3">Who needs app access?</h5>
                 <div class="row g-4" style="display: flex; justify-content: center; align-items: center;">
                     <div class="col-9">
-                        <p class="text-start">This is an experiment to see if i can make a page to simulate a guide
-                            payload
+                        <p class="text-start">This is a way to see what a visitor's current guides would be without having app access. Enter valid values for all fields below.  The URL generated on the right can be visited to receive the full guides payload. The JSON generated is for reference and is what you would see in PS Tools if you were to decode the jzb.
                         </p>
                     </div>
                 </div>
@@ -115,69 +113,109 @@
             <div class="row g-5 align-items-center "
                 style="display: flex; justify-content: center; align-items: center;">
                 <div class="col-lg-6">
-                    <form>
+                    <h5 class="px-3">All fields required</h5>
+                    <form id="myForm">
                         <div class="form-group">
                             <label for="visitorId">visitorId</label>
-                            <input type="text" class="form-control" id="visitorId" name="genericInput">
+                            <input type="text" class="form-control" id="visitorId" name="visitorId" placeholder="ex: exampleVisitor">
                         </div>
                         <div class="form-group">
                             <label for="accountId">accountId</label>
-                            <input type="text" class="form-control" id="accountId" name="genericInput">
+                            <input type="text" class="form-control" id="accountId" name="accountId" placeholder="ex: exampleAccount">
                         </div>
                         <div class="form-group">
                             <label for="url">url</label>
-                            <input type="text" class="form-control" id="url" name="genericInput">
+                            <input type="text" class="form-control" id="url" name="url" placeholder="ex: https://thisIsMyWebsite.com.org.biz/ohHai">
                         </div>
                         <div class="form-group">
                             <label for="agentVersion">agentVersion</label>
-                            <input type="text" class="form-control" id="agentVersion" name="genericInput">
+                            <input type="text" class="form-control" id="agentVersion" name="agentVersion" placeholder="ex: 2.260.0_prod">
                         </div>
                         <div class="form-group">
                             <label for="apiKey">apiKey</label>
-                            <input type="text" class="form-control" id="apiKey" name="genericInput">
+                            <input type="text" class="form-control" id="apiKey" name="apiKey" placeholder="ex: 11235813-plz2-usea-real-apikeythxbai">
                         </div>
                         <div class="form-group">
                             <label for="region">region</label>
-                            <input type="text" class="form-control" id="region" name="genericInput">
+                            <select class="form-select mb-3" id="region" name="region">
+                                <option selected value="app.pendo.io">IO</option>
+                                <option value="app.eu.pendo.io">EU</option>
+                                <option value="us1.app.pendo.io">US1</option>
+                                <option value="app.jpn.pendo.io">JPN</option>
+                            </select>
                         </div>
+                        <button type="button" class="btn btn-secondary" onclick="generateJSON()">Generate JSON</button>
                     </form>
                 </div>
                 <div class="col-lg-6">
-                    output the json here i guess?
-                </div>
-            </div>
-            <div class="row g-5 align-items-center "
-                style="display: flex; justify-content: center; align-items: center;">
-                <div class="col-lg-6">
-                    <form id="myForm">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name">
-
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email">
-
-                        <button type="button" onclick="generateJSON()">Generate JSON</button>
-                    </form>
-                    <script>
-                        function generateJSON() {
-                            const form = document.getElementById('myForm');
-                            const formData = new FormData(form);
-                            const jsonData = {};
-
-                            for (const [key, value] of formData.entries()) {
-                                jsonData[key] = value;
-                            }
-
-                            document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
-                        }
-                    </script>
-                    
-                </div>
-                <div class="col-lg-6">
+                    <h5 class="px-3" style="display:none" id="urlHeader">Guide request URL (visit to receive guides payload)</h5>
+                    <pre id="guideUrl" style="white-space: pre-wrap;word-wrap: break-word;"></pre>
+                    <h5 class="px-3" style="display:none" id="jsonHeader">Guide request JSON</h5>
                     <pre id="jsonOutput"></pre>
                 </div>
+                <script>
+                    function generateJSON() {
+                        const form = document.getElementById('myForm');
+                        //const formData = new FormData(form);
+
+                        let currentDate = new Date().toLocaleDateString();
+                        const currentEpochTime = Date.now();
+
+                        const visitorInput = form.elements['visitorId'].value;
+                        const accountInput = form.elements['accountId'].value;
+                        const urlInput = form.elements['url'].value;
+                        const agentVersionInput = form.elements['agentVersion'].value;
+                        const apiKey = form.elements['apiKey'].value;
+                        const regionInput = form.elements['region'].value;
+
+                        console.log(accountInput.value);
+
+                        const jsonData = {
+                            "visitorId": visitorInput,
+                            "accountId": accountInput,
+                            "url": urlInput,
+                            "metadata": {
+                                "visitor": {
+                                    "id": visitorInput,
+                                    "language": "en_US"
+                                },
+                                "account": {
+                                    "id": accountInput
+                                },
+                                "parentAccount": {},
+                                "date": currentDate,
+                                "version": agentVersionInput
+                            }
+                        };
+
+                        document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
+
+                        //build the jzb
+                        const jsonStr = JSON.stringify(jsonData); // Convert object to JSON string
+                        const utf8Encoder = new TextEncoder();
+                        const bytes = utf8Encoder.encode(jsonStr); // Encode JSON string to UTF-8 bytes
+
+                        const compressed = pako.deflate(bytes); // Compress the bytes (using zlib equivalent library, e.g., pako)
+                        const base64Encoded = btoa(String.fromCharCode(...compressed)) // Convert to Base64 string
+
+                        const urlSafeBase64 = base64Encoded
+                            .replace(/\+/g, '-')
+                            .replace(/\//g, '_')
+                            .replace(/=+$/, ''); // Make it URL-safe by replacing `+` and `/`, and removing `=` padding
+
+                        console.log(urlSafeBase64);
+
+                        guideUrl = `https://${regionInput}/data/guide.js/${apiKey}?jzb=${urlSafeBase64}&v=${agentVersionInput}&ct=${currentEpochTime}`;
+
+                        document.getElementById('guideUrl').textContent = guideUrl;
+                        document.getElementById('urlHeader').style.display = 'block';
+                        document.getElementById('jsonHeader').style.display = 'block';
+
+                        console.log(guideUrl);
+                    }
+                </script>
             </div>
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
                 <div class="col-4">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -201,8 +239,8 @@
                         <button type="button" class="btn btn-warning">Here</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        </div>  
     </div>
     <!-- Main Body - White section End -->
 
@@ -271,6 +309,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/pako.js"></script>
 </body>
 
 </html>
