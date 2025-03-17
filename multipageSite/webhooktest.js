@@ -1,7 +1,4 @@
-const util = require('util');
-const encoder = new util.TextEncoder();
-const crypto = require('crypto'); 
-console.log(crypto.subtle);
+const encoder = new TextEncoder();  
 
 let payload;
 let secret;
@@ -14,10 +11,6 @@ async function verifySignature(secret, sigHex, payload) {
 
   let algorithm = { name: "HMAC", hash: { name: 'SHA-256' } };
   let keyBytes = encoder.encode(secret);
-
-  //console.log(secret);
-  //console.log(keyBytes);
-
 
   let extractable = false;
   let key = await crypto.subtle.importKey(
@@ -36,9 +29,8 @@ async function verifySignature(secret, sigHex, payload) {
     sigBytes,
     dataBytes,
   );
-  console.log(equal);
+  console.log("equal = " + equal);
   return equal;
-
 }
 
 function hexToBytes(hex) {
@@ -52,9 +44,8 @@ function hexToBytes(hex) {
     bytes[index] = b;
     index += 1;
   }
-  console.log(bytes);
+  console.log("bytes = " + bytes);
   return bytes;
 }
 
-verifySignature();
-console.log(crypto.subtle);
+verifySignature(secret, sigHex, payload);
