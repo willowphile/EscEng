@@ -54,7 +54,7 @@
   <!-- <script id="ze-snippet"
     src="https://static.zdassets.com/ekr/snippet.js?key=dc4afdde-f15e-4734-822a-ff35c717c3cf"> </script> -->
   <!-- End of pendo1732030378 Zendesk Widget script -->
-<!--   <script>
+  <!--   <script>
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
       app_id: "x2v03hee",
@@ -161,15 +161,33 @@
             </script>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
-            <div>Enter your visitorId: <input type="text" id="visitorField" value="exampleVisitor"></div>
-            <div>Enter your accountId: <input type="text" id="accountField" value="exampleAccount"></div>
+
+            
+
+
+            <div>
+              Enter your visitorId:
+              <input type="email" id="visitorField" class="form-control mb-2" placeholder="Enter your Pendo email">
+            </div>
+            <div>
+              Enter your accountId:
+              <input type="text" id="accountField" class="form-control" placeholder="Enter your sub-namespace">
+            </div>
             <button onclick="identifyNewVisitor()" class="btn-learn-more" id="identify">identify!</button>
+
             <script type="text/javascript">
               function identifyNewVisitor() {
-                // get the entered values
-                let pendoVisitor = document.getElementById("visitorField").value;
-                let pendoAccount = document.getElementById("accountField").value;
-                // feed them into an initialize statement
+                const pendoVisitor = document.getElementById("visitorField").value.trim();
+                const pendoAccount = document.getElementById("accountField").value.trim();
+
+                // Basic email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(pendoVisitor)) {
+                  alert("Please enter a valid email address for visitorId.");
+                  return;
+                }
+
+                // Initialize Pendo
                 pendo.initialize({
                   visitor: {
                     id: pendoVisitor,
@@ -179,26 +197,28 @@
                     id: pendoAccount
                   }
                 });
-                // save the values to local storage for future reference
+
+                // Save to local storage
                 localStorage.setItem('visitor', pendoVisitor);
                 localStorage.setItem('account', pendoAccount);
 
-                // this updates the current visitor to what the agent now knows
-                let currentVisitor = localStorage.getItem('visitor')
-                document.getElementById("currentVisitorId").innerText = currentVisitor;
+                // Update UI
+                document.getElementById("currentVisitorId").innerText = pendoVisitor;
 
+                // Initialize Intercom
                 Intercom('boot', {
                   api_base: "https://api-iam.intercom.io",
                   app_id: "x2v03hee",
                   hide_default_launcher: true,
-                  user_id: localStorage.getItem('visitor'),
-                  email: localStorage.getItem('visitor'),
-                  last_active_account_id: localStorage.getItem('account'),
-                  hostName: 'app.pendo.io' //ok to hardcode for testing since most TSE subs are in the US
+                  user_id: pendoVisitor,
+                  email: pendoVisitor,
+                  last_active_account_id: pendoAccount,
+                  hostName: 'app.pendo.io'
                 });
               }
             </script>
           </div>
+
         </div>
       </div>
     </section>
