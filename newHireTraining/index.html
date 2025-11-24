@@ -32,7 +32,42 @@
       border: 1px solid #e43c5c;
       border-radius: 10px;
     }
+
+    .customHtml.icon-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      height: 100%;
+      /* 👈 key: make each card stretch */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* pushes content apart nicely */
+      text-align: center;
+    }
+
+    .customHtml.icon-box .icon {
+      font-size: 2rem;
+      color: #0d6efd;
+      /* Bootstrap blue */
+      margin-bottom: 15px;
+    }
+
+    .customHtml.icon-box h4.title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .customHtml.icon-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    }
   </style>
+
 
   <!-- =======================================================
          *** Don't worry about anything above this line! ***
@@ -48,32 +83,10 @@
         y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
         z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
       })(window, document, 'script', 'pendo');
-    })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');
+    })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');  // Replace with your Pendo API key
   </script>
-  <!-- Start of pendo1732030378 Zendesk Widget script -->
-  <!-- <script id="ze-snippet"
-    src="https://static.zdassets.com/ekr/snippet.js?key=dc4afdde-f15e-4734-822a-ff35c717c3cf"> </script> -->
-  <!-- End of pendo1732030378 Zendesk Widget script -->
-  <!--   <script>
-    window.intercomSettings = {
-      api_base: "https://api-iam.intercom.io",
-      app_id: "x2v03hee",
-      hide_default_launcher: true,
-      user_id: localStorage.getItem('visitor'),
-      email: localStorage.getItem('visitor'),
-      last_active_account_id: localStorage.getItem('account'),
-      hostName: app.pendo.io //ok to hardcode for testing since most TSE subs are in the US
-    };
-  </script> -->
-
-
-  <!-- <script>
-    // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/x2v03hee'
-    (function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/x2v03hee'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (document.readyState === 'complete') { l(); } else if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();
-  </script> -->
 
   <!-- ======This script assigns dynamic IDs to some elements====== -->
-
   <script type="text/javascript">
     function addIdToCard() {
       const inputEle = document.getElementsByClassName('dynamicIds');
@@ -87,7 +100,7 @@
 </head>
 
 <body>
-  <!-- ======= Header ======= -->
+  <!-- ======= Header Section ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a> <a
@@ -96,46 +109,58 @@
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link active" href="../index.html">Portal</a></li>
+          <li><a class="nav-link active" href="../index.html">EE Portal</a></li>
           <li><a class="nav-link scrollto" href="#identify">Identify</a></li>
           <li class="dropdown nav-link scrollto">
-            <a href="#clickEvents"><span>Tagging</span> <i class="bi bi-chevron-down"></i></a>
+            <a href="#clickEvents"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#clickEvents">Feature Tagging</a></li>
-              <li><a href="#pages">Moar Tricky Tagging</a></li>
-              <li><a href="#clickEventProps">clickEventProps</a></li>
+              <li><a href="#basicTagging">Basic Feature Tagging</a></li>
+              <li><a href="#moarBasicElementTypes">Moar Basics</a></li>
+              <li><a href="#advancedTagging">Advanced Feature Tagging</a></li>
+              <li><a href="#pageSpecific">Page-specific Tags</a></li>
+              <li><a href="#customHtml">Custom HTML Attributes</a></li>
+              <li><a href="#noids">Sibling/Contains Tags</a></li>
+              <li><a href="#clickEventProps">Click Event Props</a></li>
+              <li><a href="#disappearingElements">Disappearing Elements</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#trackEvents">Track Events</a></li>
-          <li><a class="nav-link scrollto" href="#consoleCommands">Console Commands</a></li>
+          <li><a class="nav-link scrollto" href="#trackEvents">Other Pages</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
-      <!-- .navbar -->
     </div>
   </header>
   <!-- End Header -->
-  <!-- ======= home Section ======= -->
+  <!-- ======= Home (Top) Section ======= -->
   <section id="home" class="anchor">
     <div class="home-container">
-      <h3>Single Page Application</strong></h3>
+      <h3>New Hire Training Site</strong></h3>
       <h1>CLICK ALL THE THINGS!</h1>
-      <p style="color:white;">This SPA is full of all manners of feature-related things.<br>
-        Try tagging all the buttons in the sections below in ways to capture events unique
-        to that element.</p>
+      <p style="color:white;">This page is full of all manners of feature-related things.<br>
+        Each section increases with difficulty and will approximately align with the new hire checklist.</p>
       <a href="#identify" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section>
   <!-- End home -->
   <main id="main">
+
     <!-- ======= identify Section ======= -->
     <section id="identify" class="identify anchor">
+
       <div class="container">
+
         <div class="section-title">
+          <div class="alert alert-primary" id="firstTimers" role="alert"
+            style="text-align: center; max-width: 75%; margin: 20px auto;">
+            If this is your first time loading this page, be sure to add your subscription's API Key to the Pendo
+            snippet in the <code>&lt;head&gt;</code> section of each <code>.html</code> file! By default, it is set to
+            the TS Demo sub, 5046634419191808.
+          </div>
+
           <h2>Identify</h2>
           <h3>Let's start with <span>Identification</span></h3>
-          <p>Right now, the government is not tracking you.
-          </p>
+          <p>Right now, the government is not tracking you.</p>
         </div>
         <div class="row content">
           <div class="col-lg-6">
@@ -162,16 +187,16 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
 
-            
+
 
 
             <div>
-              Enter your visitorId:
-              <input type="email" id="visitorField" class="form-control mb-2" placeholder="Enter your Pendo email">
+              Enter a visitorId:
+              <input type="email" id="visitorField" class="form-control mb-2" placeholder="visitor123">
             </div>
             <div>
-              Enter your accountId:
-              <input type="text" id="accountField" class="form-control" placeholder="Enter your sub-namespace">
+              Enter an accountId:
+              <input type="text" id="accountField" class="form-control" placeholder="accountABC">
             </div>
             <button onclick="identifyNewVisitor()" class="btn-learn-more" id="identify">identify!</button>
 
@@ -180,12 +205,12 @@
                 const pendoVisitor = document.getElementById("visitorField").value.trim();
                 const pendoAccount = document.getElementById("accountField").value.trim();
 
-                // Basic email validation
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(pendoVisitor)) {
-                  alert("Please enter a valid email address for visitorId.");
-                  return;
-                }
+                // Basic email validation. Uncomment to force email format.
+                // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // if (!emailPattern.test(pendoVisitor)) {
+                //   alert("Please enter a valid email address for visitorId.");
+                //   return;
+                // }
 
                 // Initialize Pendo
                 pendo.initialize({
@@ -204,17 +229,6 @@
 
                 // Update UI
                 document.getElementById("currentVisitorId").innerText = pendoVisitor;
-
-                // Initialize Intercom
-              //   Intercom('boot', {
-              //     api_base: "https://api-iam.intercom.io",
-              //     app_id: "x2v03hee",
-              //     hide_default_launcher: true,
-              //     user_id: pendoVisitor,
-              //     email: pendoVisitor,
-              //     last_active_account_id: pendoAccount,
-              //     hostName: 'app.pendo.io'
-              //   });
               }
             </script>
           </div>
@@ -223,14 +237,130 @@
       </div>
     </section>
     <!-- End identify Section -->
-    <!-- ======= clickEvents Section ======= -->
-    <section id="clickEvents" class="clickEvents anchor">
+
+
+    <!-- ======= Basic Tagging Section ======= -->
+    <section id="basicTagging" class="clickEvents anchor">
       <div class="container">
         <div class="section-title">
           <h2>Features</h2>
-          <h3>Feature Tagging & <span>Click Events</span></h3>
-          <p>things to add here and in features below the big boxes: buttons, modal, disappearing and/or hidden elemnts,
-            nth children, card containers where the :contains text is a sibling, custom html elements, dynamic ids
+          <h3>Basic <span>Feature Tagging</span></h3>
+          <p>Below are a few common feature types you might encounter when tagging an application.
+            Try to figure out how to tag each one as specifically as possible using the designer!
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title">Button #1</h4>
+              <p class="description">If an element has an ID, that is likely the best option.</p><br>
+              <button type="button" class="btn btn-primary" id="IDsAreIDeal">Tag me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title">Button #2</h4>
+              <p class="description">When no ID is set, classes may uniquely identify them</p><br>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary i-am-the-only-button-with-this-class">
+                Tag me!
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title">Yet another button</a></h4>
+              <p class="description">We also can use other default html attributes like name or value</p><br>
+              <button type="button" class="btn btn-primary" name="inigoMontoya">Tag me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title">I'm sure I'm not a trap.</a></h4>
+              <p class="description">I'm technically not a button. What am I designer?</p><br>
+              <a href="#identify" class="btn btn-primary" role="button">Tag me!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End clickEvents Section -->
+    <!-- ======= Pages Section ======= -->
+    <section id="moarBasicElementTypes" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3>Other Basic Elements to Tag</span></h3>
+          <p>Below are a few common feature types you might encounter when tagging an application.
+            Try to figure out how to tag each one as specifically as possible using the designer!
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-base-station-line" style="color: #ff5828;"></i></div>
+              <h4 class="title">Radio Buttons</h4>
+              <p class="description">Is it possible to tag individual radio buttons?</p><br>
+              <input type="radio" id="option1" name="options" value="Option 1">
+              <label for="option1"> Option 1</label><br>
+              <input type="radio" id="option2" name="options" value="Option 2">
+              <label for="option2"> Option 2</label><br>
+              <input type="radio" id="option3" name="options" value="Option 3">
+              <label for="option3"> Option 3</label><br>
+              <input type="radio" id="option4" name="options" value="Option 4">
+              <label for="option4"> Option 4</label><br>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-file-list-3-line" style="color: #e361ff;"></i></div>
+              <h4 class="title">Dropdown with links</h4>
+              <p class="description">Is it possible to tag individual options in a <code>select</code> dropdown?</p><br>
+              <select id="dropdownExample" name="dropdownExample" class="form-select text-white bg-primary"
+                style="width: 75% auto;">
+                <option value="link1">Option 1</option>
+                <option value="link2">Option 2</option>
+                <option value="link3">Option 3</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-paint-brush-line" style="color: purple;"></i></div>
+              <h4 class="title">Clickable Image</h4>
+              <p class="description">One day, you'll meet Jocelyn and understand this image.</p><br>
+              <a href="assets/img/chancla.gif" target="_blank">
+                <img src="assets/img/chancla.gif" class="img-fluid" alt="Chancla">
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-fingerprint-line" style="color: green"></i></div>
+              <h4 class="title">I'm just a card</a></h4>
+              <p class="description">What if I want to just tag the card itself?</p><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End pages Section -->
+
+    <hr style="height: 2px; background-color: #333; border: none;">
+    <!-- ======= clickEvents Section ======= -->
+    <section id="advancedTagging" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3><span>Advanced</span> Feature Tagging</h3>
+          <p>Some things are not as straightforward to tag or troubleshoot. Modals, disappearing and/or hidden elemnts,
+            nth children, siblings, custom html elements, dynamic ids. The sections below will challenge you to tag some
+            of these tricky elements.
           </p>
         </div>
         <div class="row">
@@ -316,88 +446,9 @@
 
     </section>
     <!-- End clickEvents Section -->
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-6 col-6">
-            <div class="icon-box">
-              <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3><a href="">Lorem Ipsum</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6">
-            <div class="icon-box">
-              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-              <h3><a href="">Dolor Sitema</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-              <h3><a href="">Sed perspiciatis</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-              <h3><a href="">Magni Dolores</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-database-2-line" style="color: #47aeff;"></i>
-              <h3><a href="">Nemo Enim</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-              <h3><a href="">Eiusmod Tempor</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-              <h3><a href="">Midela Teren</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-              <h3><a href="">Pira Neve</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-anchor-line" style="color: #b2904f;"></i>
-              <h3><a href="">Dirada Pack</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-disc-line" style="color: #b20969;"></i>
-              <h3><a href="">Moton Ideal</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-base-station-line" style="color: #ff5828;"></i>
-              <h3><a href="">Verdo Park</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6 mt-4">
-            <div class="icon-box">
-              <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
-              <h3><a href="">Flavor Nivelanda</a></h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Features Section -->
+
     <!-- ======= Pages Section ======= -->
-    <section id="pages" class="pages anchor">
+    <section id="pageSpecific" class="pages anchor">
       <div class="container">
         <div class="text-center">
           <h3>Multiple pages in a single-page world</h3>
@@ -408,93 +459,46 @@
       </div>
     </section>
     <!-- End pages Section -->
+
     <!-- ======= customHtml Section ======= -->
-    <section id="customHtml" class="customHtml">
+    <section id="customHtml" class="clickEvents customHtml">
       <div class="container">
         <div class="section-title">
-          <h2>HTML Attributes</h2>
-          <h3>Check out our <span>Things and Stuff</span></h3>
-          <p>This would probably be a good place for the modals and siblings</p>
+          <h2>Features</h2>
+          <h3>Custom <span>HTML Attributes</span></h3>
+          <p>These are pretty easy to tag...assuming your sub is set up correctly.</p>
         </div>
         <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="customHtml-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">Things</li>
-              <li data-filter=".filter-card">Stuff</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row customHtml-container">
-          <div class="col-lg-4 col-md-6 customHtml-item filter-app">
-            <img src="assets/img/chancla.gif" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>chancla</h4>
-              <p>careful or you'll get the shoe</p>
-              <a href="assets/img/chancla.gif" data-gallery="customHtmlGallery" class="customHtml-lightbox preview-link"
-                title="Beware the Queen"><i class="bx bx-plus"></i></a>
-              <a href="https://www.urbandictionary.com/define.php?term=Chancla" class="details-link"
-                title="More Details"><i class="bx bx-link"></i></a>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx bx-ghost"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="ghost">Tag me!</button>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 customHtml-item filter-card">
-            <img src="assets/img/kermit.png" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>Kermit</h4>
-              <p>is my boyfriend</p>
-              <a href="assets/img/kermit.png" data-gallery="customHtmlGallery" class="customHtml-lightbox preview-link"
-                title="Kermit <3"><i class="bx bx-plus"></i></a>
-              <a href="https://www.tiktok.com/@cartervailmusic/video/7158197525248462126" class="details-link"
-                title="More Details"><i class="bx bx-link"></i></a>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-joystick"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="gamepad">
+                Tag me!
+              </button>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 customHtml-item filter-app">
-            <img src="assets/img/raccoonLisa.png" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>Raccoon</h4>
-              <p>the raccoon that fits in your pocket!</p>
-              <a href="assets/img/raccoonLisa.png" data-gallery="customHtmlGallery"
-                class="customHtml-lightbox preview-link" title="Official Team Mascot: The Trash Panda"><i
-                  class="bx bx-plus"></i></a>
-              <a href="https://pendo.slack.com/archives/G38M6SDRP/p1655990240696889" class="details-link"
-                title="More Details"><i class="bx bx-link"></i></a>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-coffee"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="mmmmcoffee">mmmmcoffee</button>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 customHtml-item filter-card">
-            <img src="assets/img/smashKarts.jpeg" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>Smash Karts!</h4>
-              <a href="assets/img/smashKarts.jpeg" data-gallery="customHtmlGallery"
-                class="customHtml-lightbox preview-link" title="The poor man's mario kart"><i
-                  class="bx bx-plus"></i></a>
-              <a href="https://smashkarts.io/" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 customHtml-item filter-card">
-            <img src="assets/img/pendo.jpeg" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>Pendo</h4>
-              <p>Raleigh office</p>
-              <a href="assets/img/pendo.jpeg" data-gallery="customHtmlGallery" class="customHtml-lightbox preview-link"
-                title="Where the paycheck comes from"><i class="bx bx-plus"></i></a>
-              <a href="https://www.pendo.io/" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 customHtml-item filter-app">
-            <img src="assets/img/cheese.png" class="img-fluid" alt="">
-            <div class="customHtml-info">
-              <h4>Cheese</h4>
-              <p>Who cares if you're lactose intolerant?</p>
-              <a href="assets/img/cheese.png" data-gallery="customHtmlGallery" class="customHtml-lightbox preview-link"
-                title="This all belongs to Alisyn. Please provide lactaid."><i class="bx bx-plus"></i></a>
-              <a href="https://www.reddit.com/r/Cheese/" class="details-link" title="More Details"><i
-                  class="bx bx-link"></i></a>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-bug"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="bug">Tag Me!</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-
+    <hr style="height: 2px; background-color: #333; border: none;">
     <!-- ======= noIds Section ======= -->
     <section id="noIds" class="noIds">
       <div class="container">
@@ -581,6 +585,7 @@
       </div>
     </section>
     <!-- End noIds Section -->
+    <hr style="height: 2px; background-color: #333; border: none;">
     <!-- ======= clickEventProps Section ======= -->
     <section id="clickEventProps" class="clickEventProps anchor">
       <div class="container">
@@ -664,7 +669,7 @@
     <!-- End clickEventProps Section -->
 
     <!-- ======= disappearingElement Section ======= -->
-    <section id="disappearingElement" class="clickEventProps anchor">
+    <section id="disappearingElements" class="clickEventProps anchor">
       <div class="container">
         <div class="section-title">
           <h2>Disappearing Elements</h2>
@@ -700,53 +705,59 @@
                 <p style="text-align: center; color:#e43c5c; font-weight: bold; font-size:large;">Now let's get some hot
                   takes</h2>
                 <div class="col-md-6 form-group">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <p>Choose any:</p>
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Meat" style="opacity:0">
-                    <label class="form-check-label" for="inlineCheckbox1">Meat</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Meats"
+                      style="opacity:0">
+                    <label class="form-check-label" for="inlineCheckbox1"
+                      style="width:200px; text-align: center;">Meats</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Veggie"
                       style="opacity:0">
-                    <label class="form-check-label" for="inlineCheckbox2">Veggie</label>
+                    <label class="form-check-label" for="inlineCheckbox2"
+                      style="width:200px; text-align: center;">Veggie</label>
                   </div>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <p>Choose one:</p>
                     <input class="form-check-input" type="radio" name="Radios" id="radioFlyer" value="cheese"
                       onclick="showNothing()">
-                    <label class="radioLabel" for="radioFlyer">Cheese</label>
+                    <label class="radioLabel" for="radioFlyer" style="width:200px; text-align: center;">Cheese</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="Radios" id="radioHead" value="noCheese"
                       onclick="showTextBox()">
-                    <label class="radioLabel" for="radioHead">No Cheese</label>
+                    <label class="radioLabel" for="radioHead" style="width:200px; text-align: center;">No Cheese</label>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Coke" style="opacity:0">
-                    <label class="form-check-label" for="inlineCheckbox3">Coke</label>
+                    <label class="form-check-label" for="inlineCheckbox3"
+                      style="width:200px; text-align: center;">Coke</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Pepsi"
                       style="opacity:0">
-                    <label class="form-check-label" for="inlineCheckbox4">Pepsi</label>
+                    <label class="form-check-label" for="inlineCheckbox4"
+                      style="width:200px; text-align: center;">Pepsi</label>
                   </div>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="Radio2" id="radio881" value="Pineapple"
                       onclick="showTextBox2()">
-                    <label class="radioLabel" for="radio881">Pineapple</label>
+                    <label class="radioLabel" for="radio881" style="width:200px; text-align: center;">Pineapple</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="Radio2" id="radioShack" value="noMonster"
                       onclick="showNothing2()">
-                    <label class="radioLabel" for="radioShack">I'm no monster</label>
+                    <label class="radioLabel" for="radioShack" style="width:200px; text-align: center;">I'm no
+                      monster</label>
                   </div>
                 </div>
               </div>
@@ -810,7 +821,7 @@
       </div>
     </section>
     <!-- End disappearingElement Section -->
-
+    <hr style="height: 2px; background-color: #333; border: none;">
     <!-- ======= trackEvents Section ======= -->
     <section id="trackEvents" class="trackEvents anchor">
       <div class="container">
@@ -950,97 +961,7 @@
         </div>
     </section>
     <!-- End trackEvents Section -->
-    <!-- ======= Console Commands Section ======= -->
-    <section id="consoleCommands" class="consoleCommands anchor">
-      <div class="container">
-        <div class="section-title">
-          <h2>F.U.C.C.</h2>
-          <h3>Frequent(ish) Used <span>Console Commands</span></h3>
-          <p>We all know validateInstall, but do you know these?</p>
-          <p>Open up the Console in dev tools and try these out!
-          </p>
-        </div>
-        <ul class="consoleCommands-list">
-          <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#consoleCommands1">How can you get a list of
-              guide NAMES available on this page? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands1" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                pendo._.pluck(pendo.guides,"name")
-              </p>
-            </div>
-          </li>
-          <li>
-            <div data-bs-toggle="collapse" href="#consoleCommands2" class="collapsed question">How do you know which
-              element is getting a click? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands2" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                window.addEventListener('click', (e) => console.log(e));
-              </p>
-            </div>
-          </li>
-          <li>
-            <div data-bs-toggle="collapse" href="#consoleCommands3" class="collapsed question">How can you identify a
-              new visitor via the console? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands3" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                pendo.identify({"visitor": {"id": "visitorId"},"account": {"id": "accountId"}})
-              </p>
-            </div>
-          </li>
-          <li>
-            <div data-bs-toggle="collapse" href="#consoleCommands4" class="collapsed question">Ac odio tempor orci
-              dapibus. Aliquam
-              eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands4" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id
-                donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit
-                ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-              </p>
-            </div>
-          </li>
-          <li>
-            <div data-bs-toggle="collapse" href="#consoleCommands5" class="collapsed question">Tempus quam pellentesque
-              nec nam
-              aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands5" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc
-                vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus
-                gravida quis blandit turpis cursus in
-              </p>
-            </div>
-          </li>
-          <li>
-            <div data-bs-toggle="collapse" href="#consoleCommands6" class="collapsed question">Tortor vitae purus
-              faucibus ornare.
-              Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i
-                class="bi bi-chevron-up icon-close"></i>
-            </div>
-            <div id="consoleCommands6" class="collapse" data-bs-parent=".consoleCommands-list">
-              <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada
-                nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis
-                tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas
-                fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <!-- End F.A.Q Section -->
+
   </main>
   <!-- End #main -->
   <!-- ======= Footer ======= -->
