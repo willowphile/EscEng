@@ -24,6 +24,9 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- Pendo Snippet File -->
+  <script src="assets/js/pendoSnippet.js"></script>
+
   <style>
     #getData {
       height: 150px;
@@ -68,24 +71,6 @@
     }
   </style>
 
-
-  <!-- =======================================================
-         *** Don't worry about anything above this line! ***
-         ======================================================== -->
-
-  <script>
-    (function (apiKey) {
-      (function (p, e, n, d, o) {
-        var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
-        v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
-          o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
-        })(v[w]);
-        y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
-        z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
-      })(window, document, 'script', 'pendo');
-    })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');  // Replace with your Pendo API key
-  </script>
-
   <!-- ======This script assigns dynamic IDs to some elements====== -->
   <script type="text/javascript">
     function addIdToCard() {
@@ -105,12 +90,10 @@
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a> <a
           href="index.html">Escalation Engineering</a>
-        <a href="index.html" class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"></a>
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link active" href="../index.html">EE Portal</a></li>
-          <li><a class="nav-link scrollto" href="#identify">Identify</a></li>
           <li class="dropdown nav-link scrollto">
             <a href="#clickEvents"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -122,13 +105,33 @@
               <li><a href="#noids">Sibling/Contains Tags</a></li>
               <li><a href="#clickEventProps">Click Event Props</a></li>
               <li><a href="#disappearingElements">Disappearing Elements</a></li>
+              <li><a href="#shadowDomSection">Shadow DOM</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#trackEvents">Track Events</a></li>
           <li><a class="nav-link scrollto" href="#trackEvents">Other Pages</a></li>
+          <li><a class="nav-link scrollto login" href="#identify">
+              <span class="nav-text">
+                <div id="visitorIdHeader"></div>
+                <div id="visitorInstructions"></div>
+              </span>
+            </a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
+      <script type="text/javascript">
+        setInterval(function () {
+          let currentVisitor = localStorage.getItem('visitor');
+          if (currentVisitor = "" || currentVisitor == null) {
+            document.getElementById("visitorInstructions").innerText = "Please log in below"
+          } else {
+            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+            document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+            document.getElementById("visitorInstructions").style.fontSize = "x-small";
+          };
+        },
+          1000);
+      </script>
     </div>
   </header>
   <!-- End Header -->
@@ -154,7 +157,7 @@
           <div class="alert alert-primary" id="firstTimers" role="alert"
             style="text-align: center; max-width: 75%; margin: 20px auto;">
             If this is your first time loading this page, be sure to add your subscription's API Key to the Pendo
-            snippet in the <code>&lt;head&gt;</code> section of each <code>.html</code> file! By default, it is set to
+            snippet file <code>/assets/js/pendoSnippet.js</code>! By default, it is set to
             the TS Demo sub, 5046634419191808.
           </div>
 
@@ -821,6 +824,159 @@
       </div>
     </section>
     <!-- End disappearingElement Section -->
+    <hr style="height: 2px; background-color: #333; border: none;">
+
+    <!-- ======= shadowDom Section ======= -->
+    <section id="shadowDomSection" class="py-5 clickEvents anchor">
+      <div class="container">
+        <div class="section-title text-center mb-4">
+          <h2>Features</h2>
+          <h3>Exploring the <span>Shadow DOM</span></h3>
+          <p>Elements below live inside a shadow root. Tagging these in Pendo can sometimes be a little tricky.</p><br>
+        </div>
+
+        <div class="row gy-4 justify-content-center">
+
+          <!-- Card 1 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-cube-alt"></i></div>
+              <h4 class="title">Simple Shadow Button</h4>
+              <p class="description">A button rendered inside a custom element with a shadow root.</p>
+              <custom-button></custom-button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-image-alt"></i></div>
+              <h4 class="title">Shadow Image Card</h4>
+              <p class="description">An image and caption within a shadow DOM element.</p>
+              <shadow-card></shadow-card>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-edit-alt"></i></div>
+              <h4 class="title">Form in Shadow DOM</h4>
+              <p class="description">Inputs and buttons encapsulated in a shadow tree.</p>
+              <shadow-form></shadow-form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Shadow DOM component scripts -->
+    <script>
+      // ----- Example 1: Simple Button Component -----
+      class CustomButton extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          button {
+            background: #e43c5c;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+          }
+          button:hover { background: #d01d3f; }
+        </style>
+        <br>
+        <button id="shadowBtn">Click Inside Shadow</button>
+      `;
+          shadow.querySelector('#shadowBtn').addEventListener('click', () => {
+            alert('Button clicked inside shadow DOM!');
+          });
+        }
+      }
+      customElements.define('custom-button', CustomButton);
+
+      // ----- Example 2: Image + Text -----
+      class ShadowCard extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          .card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            text-align: center;
+          }
+          img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+          }
+          p {
+            margin: 10px 0;
+            color: #444;
+          }
+        </style>
+        <div class="card">
+          <img src="assets/img/chancla.gif" alt="Chancla">
+          <p>This image lives in the shadow DOM.</p>
+        </div>
+      `;
+        }
+      }
+      customElements.define('shadow-card', ShadowCard);
+
+      // ----- Example 3: Form inside Shadow DOM -----
+      class ShadowForm extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+          input, select, button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+          }
+          button {
+            background: #0d6efd;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+          }
+          button:hover { background: #084298; }
+        </style>
+        <form id="shadowForm">
+          <input type="text" placeholder="Enter name" />
+          <select>
+            <option>Choose option</option>
+            <option>Option A</option>
+            <option>Option B</option>
+          </select>
+          <button type="button">Submit</button>
+        </form>
+      `;
+          shadow.querySelector('button').addEventListener('click', () => {
+            alert('Form inside shadow DOM submitted!');
+          });
+        }
+      }
+      customElements.define('shadow-form', ShadowForm);
+    </script>
+
     <hr style="height: 2px; background-color: #333; border: none;">
     <!-- ======= trackEvents Section ======= -->
     <section id="trackEvents" class="trackEvents anchor">

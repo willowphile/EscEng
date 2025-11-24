@@ -579,6 +579,20 @@ section {
 }
 
 
+.nav-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: #e43c5c 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.nav-text:hover {
+  background: #e43c5c;
+  color: #fff;
+  text-decoration: none;
+}
 
 /*--------------------------------------------------------------
 # clickEvents
@@ -1413,13 +1427,14 @@ section {
   height: 15px;
 }
 
-#explainYourself, #explainYourself2 {
+#explainYourself,
+#explainYourself2 {
   display: none;
 }
 
-.form-check-input:checked + .form-check-label {
+.form-check-input:checked+.form-check-label {
   background: blue;
-  color:white;
+  color: white;
 }
 
 .form-check-label {
@@ -1443,13 +1458,17 @@ section {
   transition: 0.4s;
   border-radius: 5px;
 }
-.form-check-input:checked + .radioLabel {
+
+.form-check-input:checked+.radioLabel {
   background: blue;
-  color:white;
+  color: white;
 }
 
-#radioFlyer, #radioHead, #radio881, #radioShack {
-  opacity:0;
+#radioFlyer,
+#radioHead,
+#radio881,
+#radioShack {
+  opacity: 0;
 }
 
 .clickEventProps .php-email-form .form-group {
