@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EE Training Template</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Nunito:300,400,600,700|Poppins:300,400,500,600,700"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS -->
+    <link href="assets/css/stylesMPA.css" rel="stylesheet" />
+
+    <!-- =======================================================
+       Pendo Snippet (keep this in every page)
+  ======================================================== -->
+    <script>
+        (function (apiKey) {
+            (function (p, e, n, d, o) {
+                var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = o._q || [];
+                v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track'];
+                for (w = 0, x = v.length; w < x; ++w)(function (m) {
+                    o[m] = o[m] || function () {
+                        o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0)));
+                    };
+                })(v[w]);
+                y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+            })(window, document, 'script', 'pendo');
+        })('167e41e0-0f3d-466f-4800-0ea4175ea6ba');
+    </script>
+</head>
+
+<body>
+    <!-- ======= Header / Nav ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h3 class="logo">
+                <a href="../index.html">
+                    <img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid" />
+                    Escalation Engineering
+                </a>
+            </h3>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="identify.html">Identify</a></li>
+                    <li class="dropdown nav-link">
+                        <a href="#"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="basic-tagging.html">Basic Tagging</a></li>
+                            <li><a href="advanced-tagging.html">Advanced Tagging</a></li>
+                            <li><a href="custom-html.html">Custom HTML</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="track-events.html">Track Events</a></li>
+                    <li><a class="nav-link" href="other-pages.html">Other Pages</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= home Section ======= -->
+    <section id="home" class="anchor">
+        <div class="home-container">
+            <h1>CLICK ALL THE THINGS!</h1>
+        </div>
+    </section>
+    <!-- End home -->
+
+    <!-- ======= Main Content ======= -->
+    <main id="main" style="margin-top: 100px;">
+        <section class="container py-5">
+            <div class="section-title text-center">
+                <h2>Page Title</h2>
+                <h3>Subtitle or <span>Section Focus</span></h3>
+                <p>This is your content area. Replace this with your page-specific sections or cards.</p>
+            </div>
+
+            <!-- Example content block -->
+            <div class="row gy-4">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-star"></i></div>
+                        <h4 class="title">Sample Card</h4>
+                        <p class="description">This is a placeholder card to show consistent styling.</p>
+                        <button type="button" class="btn btn-primary">Click me!</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-star"></i></div>
+                        <h4 class="title">Sample Card</h4>
+                        <p class="description">This is a placeholder card to show consistent styling.</p>
+                        <button type="button" class="btn btn-primary">Click me!</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-star"></i></div>
+                        <h4 class="title">Sample Card</h4>
+                        <p class="description">This is a placeholder card to show consistent styling.</p>
+                        <button type="button" class="btn btn-primary">Click me!</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-star"></i></div>
+                        <h4 class="title">Sample Card</h4>
+                        <p class="description">This is a placeholder card to show consistent styling.</p>
+                        <button type="button" class="btn btn-primary">Click me!</button>
+                    </div>
+                </div>
+                <!-- Add more columns/cards as needed -->
+            </div>
+        </section>
+        <hr style="height: 2px; background-color: #333; border: none;">
+        <section id="exampleForm" class="py-5 bg-light">
+            <div class="container">
+                <div class="section-title text-center mb-4">
+                    <h2>Example</h2>
+                    <h3>Generic <span>Form Section</span></h3>
+                    <p>Use this sample to demonstrate input tagging or to collect sample data.</p>
+                </div>
+
+                <form id="demoForm" class="row g-4">
+
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label for="fullName" class="form-label fw-bold">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" placeholder="Jane Doe" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-bold">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="jane@example.com" required>
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div class="col-md-6">
+                        <label for="role" class="form-label fw-bold">Role</label>
+                        <select class="form-select" id="role">
+                            <option selected disabled>Choose one...</option>
+                            <option value="admin">Administrator</option>
+                            <option value="manager">Manager</option>
+                            <option value="user">End User</option>
+                        </select>
+                    </div>
+
+                    <!-- Radio group -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold d-block">Subscription Type</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="subscription" id="freePlan" value="Free">
+                            <label class="form-check-label" for="freePlan">Free</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="subscription" id="proPlan" value="Pro">
+                            <label class="form-check-label" for="proPlan">Pro</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="subscription" id="enterprisePlan"
+                                value="Enterprise">
+                            <label class="form-check-label" for="enterprisePlan">Enterprise</label>
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes -->
+                    <div class="col-12">
+                        <label class="form-label fw-bold d-block">Preferences</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="news" value="news">
+                            <label class="form-check-label" for="news">Subscribe to newsletter</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="updates" value="updates">
+                            <label class="form-check-label" for="updates">Receive product updates</label>
+                        </div>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div class="col-12">
+                        <label for="comments" class="form-label fw-bold">Comments or Questions</label>
+                        <textarea class="form-control" id="comments" rows="4"
+                            placeholder="Write something here..."></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+    <!-- End Main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container text-center py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Escalation Engineering</span></strong>. All Rights Revoked
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Vendor JS -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- Template Main JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
