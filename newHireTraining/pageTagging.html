@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Hire Training > Page Tagging</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Nunito:300,400,600,700|Poppins:300,400,500,600,700"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS -->
+    <link href="assets/css/stylesMPA.css" rel="stylesheet" />
+
+    <!-- Pendo Snippet File -->
+    <script src="assets/js/pendoSnippet.js"></script>
+
+
+</head>
+
+<body>
+    <!-- ======= Header / Nav ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h3 class="logo">
+                <a href="../index.html">
+                    <img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid" />
+                    Escalation Engineering
+                </a>
+            </h3>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="identify.html">Identify</a></li>
+                    <li class="dropdown nav-link">
+                        <a href="#"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="basic-tagging.html">Basic Tagging</a></li>
+                            <li><a href="advanced-tagging.html">Advanced Tagging</a></li>
+                            <li><a href="custom-html.html">Custom HTML</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="track-events.html">Track Events</a></li>
+                    <li><a class="nav-link" href="other-pages.html">Other Pages</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= home Section ======= -->
+    <section id="home" class="anchor">
+        <div class="home-container">
+            <h1>Understanding Page Rules</h1>
+        </div>
+    </section>
+    <!-- End home -->
+
+    <!-- ======= Main Content ======= -->
+    <main id="main" style="margin-top: 25px;">
+        <section id="urlGenerator" class="py-5 bg-light">
+            <div class="container">
+                <div class="section-title text-center mb-4">
+                    <!-- <h3>Understanding <span>Page Rules</span></h3> -->
+                    <p>Click “Generate New URLs” to refresh each list. Each tab displays a different pattern type.</p>
+                    <p>put some specific directions in here k?</p>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="card shadow-lg w-75">
+                        <div class="card-body">
+
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs justify-content-center mb-3" id="urlTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="basicUrls-tab" data-bs-toggle="tab"
+                                        data-bs-target="#basicUrls" type="button" role="tab">Basic URLs</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="domain-tab" data-bs-toggle="tab"
+                                        data-bs-target="#domain" type="button" role="tab">Consistent paths</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="params-tab" data-bs-toggle="tab"
+                                        data-bs-target="#params" type="button" role="tab">Query Params</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="hashed-tab" data-bs-toggle="tab"
+                                        data-bs-target="#hashed" type="button" role="tab">Fragments</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="advanced-tab" data-bs-toggle="tab"
+                                        data-bs-target="#advanced" type="button" role="tab">Random</button>
+                                </li>
+
+                            </ul>
+
+                            <!-- Tab Content -->
+                            <div class="tab-content" id="urlTabContent">
+                                <div class="tab-pane fade show active" id="basicUrls" role="tabpanel">
+                                    <pre id="urlOutputbasicUrls" class="bg-dark text-white p-3 rounded"
+                                        style="height: 300px; overflow-y: auto; font-size: 0.9rem;"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="domain" role="tabpanel">
+                                    <pre id="urlOutputDomain" class="bg-dark text-white p-3 rounded"
+                                        style="height: 300px; overflow-y: auto; font-size: 0.9rem;"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="params" role="tabpanel">
+                                    <pre id="urlOutputParams" class="bg-dark text-white p-3 rounded"
+                                        style="height: 300px; overflow-y: auto; font-size: 0.9rem;"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="advanced" role="tabpanel">
+                                    <pre id="urlOutputAdvanced" class="bg-dark text-white p-3 rounded"
+                                        style="height: 300px; overflow-y: auto; font-size: 0.9rem;"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="hashed" role="tabpanel">
+                                    <pre id="urlOutputHashRouting" class="bg-dark text-white p-3 rounded"
+                                        style="height: 300px; overflow-y: auto; font-size: 0.9rem;"></pre>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="text-center mt-3">
+                                <button id="generateUrlsBtn" class="btn btn-primary">Generate New URLs</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // === Utility Helpers ===
+            const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            const randomId = (len = 8) => Math.random().toString(36).substring(2, 2 + len);
+            const randomHash = () => Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2, 10);
+
+            // === Main Generator ===
+            function generateTrainingUrls() {
+                const domains = [
+                    "https://dev.company.com",
+                    "https://staging.company.com",
+                    "https://uat" + Math.floor(Math.random() * 25 + 1) + ".company.io",
+                    "https://company.io",
+                    "https://app.net",
+                    "https://app.dev"
+                ];
+
+                const paths = [
+                    "/home",
+                    "/dashboard",
+                    "/settings",
+                    "/profile",
+                    "/product",
+                    "/help",
+                    "/reports",
+                    "/reports/scheduled",
+                    "/reports/custom",
+                    "/users",
+                    "/billing",
+                    "/search",
+                    "/search/results",
+                    "/search/results/page" + Math.floor(Math.random() * 5 + 1), 
+                    "/users/" + randomId(32) + "/details",
+                    "/account/settings/profile",
+                    "/client/" + randomId(32),
+                    "/teams/" + randomId(32) + "/members",
+                    "/reports/page" + Math.floor(Math.random() * 5 + 1)
+                ];
+
+                const queryKeys = [
+                    "user", "ref", "campaign", "session", "token", "filter", "view", "tab"
+                ];
+
+                const fragments = [
+                    "#details", "#pricing", "#faq", "#contact",
+                    "#reviews", "#overview", "#specs", "#features"
+                ];
+
+                const urls = {
+                    basicUrls: [],
+                    samePathDifferentDomain: [],
+                    samePathDifferentParams: [],
+                    advanced: [],
+                    hashRouting: []
+                };
+
+                function buildQueryParamString() {
+                    const numParams = Math.floor(Math.random() * 3) + 1;
+                    const usedKeys = [];
+                    for (let i = 0; i < numParams; i++) {
+                        const key = pick(queryKeys);
+                        const val = Math.random() > 0.6
+                            ? randomHash().slice(0, 16)
+                            // : randomId(Math.floor(Math.random() * 8) + 3);
+                            : randomId(32);
+                        usedKeys.push(`${key}=${val}`);
+                    }
+                    return "?" + usedKeys.join("&");
+                }
+
+                // --- 1. basic URLs ---
+                for (let i = 0; i < 7; i++) {
+                    const domain = pick(domains);
+                    const path = pick(paths);
+                    const query = Math.random() > 0.5 ? buildQueryParamString() : "";
+                    urls.basicUrls.push(`${domain}${path}${query}`);
+                }
+
+                // --- 2. Same path, different domain ---
+                const sharedPath = pick(paths);
+                for (let domain of domains.slice(0, 5)) {
+                    urls.samePathDifferentDomain.push(`${domain}${sharedPath}`);
+                }
+
+                // --- 3. Same domain & path, different params ---
+                const baseDomain = pick(domains);
+                const samePath = pick(paths);
+                for (let i = 0; i < 5; i++) {
+                    urls.samePathDifferentParams.push(`${baseDomain}${samePath}${buildQueryParamString()}`);
+                }
+
+                // --- 4. Random URLs ---
+                for (let i = 0; i < 10; i++) {
+                    const domain = pick(domains);
+                    const path = pick(paths);
+                    const query = buildQueryParamString();
+                    const fragment = pick(fragments);
+                    const tricky = Math.random() > 0.5 ? `/${randomHash().slice(0, 10)}` : "";
+                    urls.advanced.push(`${domain}${path}${tricky}${query}${fragment}`);
+                }
+
+                // --- 5. Hash-based “SPA routing” URLs ---
+                const hashRoutes = ["/dashboard", "/home", "/products", "/settings", "/reports", "/users"];
+                for (let i = 0; i < 5; i++) {
+                    const path = pick(paths);
+                    const hashPath = pick(hashRoutes);
+                    const query = buildQueryParamString();
+                    urls.hashRouting.push(`${baseDomain}/#${hashPath}${path}/details${query}`);
+                }
+
+                return urls;
+            }
+
+            // === Populate Tabs ===
+            function displayTrainingUrls() {
+                const urls = generateTrainingUrls();
+                document.getElementById("urlOutputbasicUrls").innerText = urls.basicUrls.join("\n");
+                document.getElementById("urlOutputDomain").innerText = urls.samePathDifferentDomain.join("\n");
+                document.getElementById("urlOutputParams").innerText = urls.samePathDifferentParams.join("\n");
+                document.getElementById("urlOutputAdvanced").innerText = urls.advanced.join("\n");
+                document.getElementById("urlOutputHashRouting").innerText = urls.hashRouting.join("\n");
+            }
+
+            // === Initialize ===
+            window.addEventListener("DOMContentLoaded", () => {
+                displayTrainingUrls();
+                document.getElementById("generateUrlsBtn").addEventListener("click", displayTrainingUrls);
+            });
+        </script>
+
+
+    </main>
+    <!-- End Main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container text-center py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Escalation Engineering</span></strong>. All Rights Revoked
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Vendor JS -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- Template Main JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
