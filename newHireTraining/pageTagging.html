@@ -25,6 +25,7 @@
 
     <!-- Template Main CSS -->
     <link href="assets/css/stylesMPA.css" rel="stylesheet" />
+    
 
     <!-- Pendo Snippet File -->
     <script src="assets/js/pendoSnippet.js"></script>
@@ -45,21 +46,38 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link" href="index.html">Home</a></li>
-                    <li><a class="nav-link" href="identify.html">Identify</a></li>
+                    <li><a class="nav-link active" href="../index.html">Portal</a></li>
+                    <li><a class="nav-link" href="index.html">Feature Tagging</a></li>
                     <li class="dropdown nav-link">
-                        <a href="#"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
+                        <a href="#"><span>Other Pages</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="basic-tagging.html">Basic Tagging</a></li>
                             <li><a href="advanced-tagging.html">Advanced Tagging</a></li>
                             <li><a href="custom-html.html">Custom HTML</a></li>
                         </ul>
                     </li>
-                    <li><a class="nav-link" href="track-events.html">Track Events</a></li>
-                    <li><a class="nav-link" href="other-pages.html">Other Pages</a></li>
+                    <li><a class="nav-link login" href="index.html">
+                            <span class="nav-text">
+                                <div id="visitorIdHeader"></div>
+                                <div id="visitorInstructions"></div>
+                            </span>
+                        </a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
+            <script type="text/javascript">
+                setInterval(function () {
+                    let currentVisitor = localStorage.getItem('visitor');
+                    if (currentVisitor = "" || currentVisitor == null) {
+                        document.getElementById("visitorInstructions").innerText = "Please log in below"
+                    } else {
+                        document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                        document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+                        document.getElementById("visitorInstructions").style.fontSize = "x-small";
+                    };
+                },
+                    1000);
+            </script>
         </div>
     </header>
     <!-- End Header -->
@@ -177,7 +195,7 @@
                     "/billing",
                     "/search",
                     "/search/results",
-                    "/search/results/page" + Math.floor(Math.random() * 5 + 1), 
+                    "/search/results/page" + Math.floor(Math.random() * 5 + 1),
                     "/users/" + randomId(32) + "/details",
                     "/account/settings/profile",
                     "/client/" + randomId(32),
