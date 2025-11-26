@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="Content-Security-Policy" content="
+    script-src cdn.pendo.io pendo-static-5046634419191808.storage.googleapis.com app.pendo.io 'unsafe-eval' 'unsafe-inline' data: localhost:8000 willowphile.github.com code.jquery.com;
+    style-src 'unsafe-inline' cdn.pendo.io pendo-static-5046634419191808.storage.googleapis.com app.pendo.io fonts.googleapis.com localhost:8000 willowphile.github.com;
+    img-src data: cdn.pendo.io data.pendo.io app.pendo.io pendo-static-5046634419191808.storage.googleapis.com localhost:8000 willowphile.github.com;
+    connect-src data.pendo.io app.pendo.io pendo-static-5046634419191808.storage.googleapis.com localhost:8000 willowphile.github.com;
+    frame-src app.pendo.io;
+    font-src cdn.pendo.io localhost:8000 willowphile.github.com fonts.gstatic.com;
+    worker-src blob:;" >
+  <title>CSP Troubleshooting</title>
+  
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Pendo Snippet File -->
+  <script src="assets/js/pendoSnippet.js"></script>
+
+  <style>
+    #getData {
+      height: 150px;
+      width: 150px;
+      padding: 10px;
+      border: 1px solid #e43c5c;
+      border-radius: 10px;
+    }
+
+    .customHtml.icon-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      height: 100%;
+      /* 👈 key: make each card stretch */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* pushes content apart nicely */
+      text-align: center;
+    }
+
+    .customHtml.icon-box .icon {
+      font-size: 2rem;
+      color: #0d6efd;
+      /* Bootstrap blue */
+      margin-bottom: 15px;
+    }
+
+    .customHtml.icon-box h4.title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .customHtml.icon-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+
+  <!-- ======This script assigns dynamic IDs to some elements====== -->
+  <script type="text/javascript">
+    function addIdToCard() {
+      const inputEle = document.getElementsByClassName('dynamicIds');
+      const temp = inputEle[0];
+      let r = (Math.random() + 1).toString(36).substring(4);
+      temp.setAttribute('id', r);
+    }
+    window.onload = addIdToCard;
+  </script>
+
+</head>
+
+<body>
+  <!-- ======= Header Section ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><img src="assets/img/dumpster-fire.gif" alt="" class="img-fluid"> <a
+          href="index.html">Escalation Engineering</a>
+      </h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link active" href="../index.html">EE Portal</a></li>
+          <li class="dropdown nav-link scrollto">
+            <a href="#clickEvents"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#basicTagging">Basic Feature Tagging</a></li>
+              <li><a href="#moarBasicElementTypes">Moar Basics</a></li>
+              <li><a href="#advancedTagging">Advanced Feature Tagging</a></li>
+              <li><a href="#pageSpecific">Page-specific Tags</a></li>
+              <li><a href="#customHtml">Custom HTML Attributes</a></li>
+              <li><a href="#noids">Sibling/Contains Tags</a></li>
+              <li><a href="#clickEventProps">Click Event Props</a></li>
+              <li><a href="#disappearingElements">Disappearing Elements</a></li>
+              <li><a href="#shadowDomSection">Shadow DOM</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#trackEvents">Track Events</a></li>
+          <li><a class="nav-link scrollto" href="#trackEvents">Other Pages</a></li>
+          <li><a class="nav-link" href="./csp.html">CSP Page</a></li>
+          <li><a class="nav-link scrollto login" href="#identify">
+              <span class="nav-text">
+                <div id="visitorIdHeader"></div>
+                <div id="visitorInstructions"></div>
+              </span>
+            </a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <script type="text/javascript">
+        setInterval(function () {
+          let currentVisitor = localStorage.getItem('visitor');
+          if (currentVisitor = "" || currentVisitor == null) {
+            document.getElementById("visitorInstructions").innerText = "Please log in below"
+          } else {
+            document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+            document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+            document.getElementById("visitorInstructions").style.fontSize = "x-small";
+          };
+        },
+          1000);
+      </script>
+    </div>
+  </header>
+  <!-- End Header -->
+  <!-- ======= Home (Top) Section ======= -->
+  <section id="home" class="anchor">
+    <div class="home-container">
+      <h3>New Hire Training - CSP Edition</strong></h3>
+      <h1>BREAK ALL THE THINGS!</h1>
+      <p style="color:white;">This page has CSP (Content Security Policy) set.<br>
+        When you're ready to play around with CSP, scroll down to get started.</p>
+      <a href="#identify" class="btn-get-started scrollto">Get Started</a>
+    </div>
+  </section>
+  <!-- End home -->
+  <main id="main">
+
+    <!-- ======= identify Section ======= -->
+    <section id="identify" class="identify anchor">
+
+      <div class="container">
+
+        <div class="section-title">
+          <div class="alert alert-secondary" id="firstTimers" role="alert"
+            style="text-align: center; max-width: 75%; margin: 20px auto;">
+            If you've changed the pendo api key in <code>/assets/js/pendoSnippet.js</code>, there are some updates you'll need to make to the CSP on this page to get it to play nice with pendo. Don't sweat, the next sections will walk you through it.
+          </div>
+
+          <h2>Identify</h2>
+          <h3>Let's start with <span>Identification</span></h3>
+          <p>Right now, the government is not tracking you.</p>
+        </div>
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              By "logging in" here, you will:
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Trigger a pendo.initialize() event with the entered info.</li>
+              <li><i class="ri-check-double-line"></i> Set your visitor and account IDs in local storage for later
+                reference.
+              </li>
+              <li><i class="ri-check-double-line"></i> You are currently identified as visitor: </li>
+              <li id="currentVisitorId"></li>
+            </ul>
+            <script>
+              setTimeout(
+                function () {
+                  var pendoVisitorId = pendo.getVisitorId();
+                  document.getElementById("currentVisitorId").innerText = pendoVisitorId;
+                },
+                1000
+              ); 
+            </script>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+
+
+
+
+            <div>
+              Enter a visitorId:
+              <input type="email" id="visitorField" class="form-control mb-2" placeholder="visitor123">
+            </div>
+            <div>
+              Enter an accountId:
+              <input type="text" id="accountField" class="form-control" placeholder="accountABC">
+            </div>
+            <button onclick="identifyNewVisitor()" class="btn-learn-more" id="identify">identify!</button>
+
+            <script type="text/javascript">
+              function identifyNewVisitor() {
+                const pendoVisitor = document.getElementById("visitorField").value.trim();
+                const pendoAccount = document.getElementById("accountField").value.trim();
+
+                // Basic email validation. Uncomment to force email format.
+                // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // if (!emailPattern.test(pendoVisitor)) {
+                //   alert("Please enter a valid email address for visitorId.");
+                //   return;
+                // }
+
+                // Initialize Pendo
+                pendo.initialize({
+                  visitor: {
+                    id: pendoVisitor,
+                    random: "autoGenerated"
+                  },
+                  account: {
+                    id: pendoAccount
+                  }
+                });
+
+                // Save to local storage
+                localStorage.setItem('visitor', pendoVisitor);
+                localStorage.setItem('account', pendoAccount);
+
+                // Update UI
+                document.getElementById("currentVisitorId").innerText = pendoVisitor;
+              }
+            </script>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- End identify Section -->
+
+
+    <!-- ======= Basic Tagging Section ======= -->
+    <section id="basicTagging" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3>Basic <span>Feature Tagging</span></h3>
+          <p>Below are a few common feature types you might encounter when tagging an application.
+            Try to figure out how to tag each one as specifically as possible using the designer!
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title">Button #1</h4>
+              <p class="description">If an element has an ID, that is likely the best option.</p><br>
+              <button type="button" class="btn btn-primary" id="IDsAreIDeal">Tag me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title">Button #2</h4>
+              <p class="description">When no ID is set, classes may uniquely identify them</p><br>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary i-am-the-only-button-with-this-class">
+                Tag me!
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title">Yet another button</a></h4>
+              <p class="description">We also can use other default html attributes like name or value</p><br>
+              <button type="button" class="btn btn-primary" name="inigoMontoya">Tag me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title">I'm sure I'm not a trap.</a></h4>
+              <p class="description">I'm technically not a button. What am I designer?</p><br>
+              <a href="#identify" class="btn btn-primary" role="button">Tag me!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End clickEvents Section -->
+    <!-- ======= Pages Section ======= -->
+    <section id="moarBasicElementTypes" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3>Other Basic Elements to Tag</span></h3>
+          <p>Below are a few common feature types you might encounter when tagging an application.
+            Try to figure out how to tag each one as specifically as possible using the designer!
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-base-station-line" style="color: #ff5828;"></i></div>
+              <h4 class="title">Radio Buttons</h4>
+              <p class="description">Is it possible to tag individual radio buttons?</p><br>
+              <input type="radio" id="option1" name="options" value="Option 1">
+              <label for="option1"> Option 1</label><br>
+              <input type="radio" id="option2" name="options" value="Option 2">
+              <label for="option2"> Option 2</label><br>
+              <input type="radio" id="option3" name="options" value="Option 3">
+              <label for="option3"> Option 3</label><br>
+              <input type="radio" id="option4" name="options" value="Option 4">
+              <label for="option4"> Option 4</label><br>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-file-list-3-line" style="color: #e361ff;"></i></div>
+              <h4 class="title">Dropdown with links</h4>
+              <p class="description">Is it possible to tag individual options in a <code>select</code> dropdown?</p><br>
+              <select id="dropdownExample" name="dropdownExample" class="form-select text-white bg-primary"
+                style="width: 75% auto;">
+                <option value="link1">Option 1</option>
+                <option value="link2">Option 2</option>
+                <option value="link3">Option 3</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-paint-brush-line" style="color: purple;"></i></div>
+              <h4 class="title">Clickable Image</h4>
+              <p class="description">One day, you'll meet Jocelyn and understand this image.</p><br>
+              <a href="assets/img/chancla.gif" target="_blank">
+                <img src="assets/img/chancla.gif" class="img-fluid" alt="Chancla">
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx ri-fingerprint-line" style="color: green"></i></div>
+              <h4 class="title">I'm just a card</a></h4>
+              <p class="description">What if I want to just tag the card itself?</p><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End pages Section -->
+
+    <hr style="height: 2px; background-color: #333; border: none;">
+    <!-- ======= clickEvents Section ======= -->
+    <section id="advancedTagging" class="clickEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3><span>Advanced</span> Feature Tagging</h3>
+          <p>Some things are not as straightforward to tag or troubleshoot. Modals, disappearing and/or hidden elemnts,
+            nth children, siblings, custom html elements, dynamic ids. The sections below will challenge you to tag some
+            of these tricky elements.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title">I'm Dynamic!</h4>
+              <p class="description">How can you tag me when my ID changes with every page load?</p><br>
+              <button type="button" class="btn btn-primary dynamicIds" onclick='whatsMyIdNow();'>Launch me!</button>
+            </div>
+            <script>
+              function whatsMyIdNow() {
+                alert("Hello! My ID is currently " + document.getElementsByClassName('dynamicIds')[0].id);
+              }
+            </script>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title">Modal</h4>
+              <p class="description">How to tag things in a modal? I am so sorry for how bad this modal is.</p><br>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch me!
+              </button>
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hello, I'm a modal model.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <center>
+                      I am the very model of a modern major modal.<br>
+                      I can hold anything, all elements at my disposal.<br>
+                      No one wants me to continue rappin'<br>
+                      So click my buttons to see what happens<br><br>
+                      <button type="button" class="btn btn-primary" id="modalButton" onclick="easyModalButton()">I'm
+                        easy! I have an
+                        ID.</button>
+                      <button type="button" class="btn btn-secondary" onclick="genericModalButton()">I'm pretty
+                        generic</button>
+
+                      <p id="clickResult"></p>
+                    </center>
+                    <script>
+                      function easyModalButton() { document.getElementById("clickResult").innerHTML = "Are you scared of the hard one?"; }
+                    </script>
+                    <script>
+                      function genericModalButton() { document.getElementById("clickResult").innerHTML = "Go easy on yourself, dude."; }
+                    </script>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title"><a href="">Sibling Rivalry</a></h4>
+              <p class="description">Write a :contains rule for ONLY this suspiciously familiar button.</p><br>
+              <button type="button" class="btn btn-primary">Launch me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title"><a href="">I'm sure I'm not a trap.</a></h4>
+              <p class="description">Just tag me, a simple button, and generate some events.</p><br>
+              <button type="button" class="btn btn-primary" id="notATrap">Launch me!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- End clickEvents Section -->
+
+    <!-- ======= Pages Section ======= -->
+    <section id="pageSpecific" class="pages anchor">
+      <div class="container">
+        <div class="text-center">
+          <h3>Multiple pages in a single-page world</h3>
+          <p> How could you tag the different sections of this app as if they were pages?</p>
+          <p> Can you tag this button and ONLY this button?</p>
+          <button type="button" class="btn btn-primary">Launch me!</button>
+        </div>
+      </div>
+    </section>
+    <!-- End pages Section -->
+
+    <!-- ======= customHtml Section ======= -->
+    <section id="customHtml" class="clickEvents customHtml">
+      <div class="container">
+        <div class="section-title">
+          <h2>Features</h2>
+          <h3>Custom <span>HTML Attributes</span></h3>
+          <p>These are pretty easy to tag...assuming your sub is set up correctly.</p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx bx-ghost"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="ghost">Tag me!</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-joystick"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="gamepad">
+                Tag me!
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-coffee"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="mmmmcoffee">mmmmcoffee</button>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box customHtml">
+              <div class="icon"><i class="bx bx-bug"></i></div>
+              <button type="button" class="btn btn-primary" data-pendo-id="bug">Tag Me!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr style="height: 2px; background-color: #333; border: none;">
+    <!-- ======= noIds Section ======= -->
+    <section id="noIds" class="noIds">
+      <div class="container">
+        <div class="section-title">
+          <h2>No IDs</h2>
+          <h3>How can you tag <span>identical elements?</span></h3>
+          <p>Come up with a way to tag these creepy siblings.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>We're all the same</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>except our text.</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>How on earth</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/twins.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-question-circle"></i></a>
+                  <a href=""><i class="bi bi-puzzle"></i></a>
+                  <a href=""><i class="bi bi-tools"></i></a>
+                  <a href=""><i class="bi bi-emoji-grimace"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>can you tag us?</h4>
+                <span><button onclick="buttonChange(this,'purple')">Click me</button></span>
+              </div>
+            </div>
+          </div>
+          <script>
+            function buttonChange(element, color) {
+              element.style.background = color;
+            }
+          </script>
+        </div>
+      </div>
+    </section>
+    <!-- End noIds Section -->
+    <hr style="height: 2px; background-color: #333; border: none;">
+
+
+    <!-- ======= disappearingElement Section ======= -->
+    <section id="disappearingElements" class="clickEventProps anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>Disappearing Elements</h2>
+          <h3>WHERE'D YOU GO?!</h3>
+          <p style="width: 100%;">In the form below, some fields conditionally appear and others aren't what they
+            appear.<br>Can you tag each individual "button"?<br>Can you make a multi-step guide that explains each
+            field?
+          </p>
+        </div>
+        <div class="row mt-5 justify-content-around">
+          <div class="col-lg-8 mt-5 mt-lg-0">
+            <form class="php-email-form">
+              <div class="row">
+                <p style="text-align: center; color:#e43c5c; font-weight: bold; font-size:large;">Tell us about
+                  yourself!</h2>
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="What is your name?"
+                    required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="text" name="quest" class="form-control" id="quest" placeholder="What is your quest?"
+                    required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <textarea style="width:100%" class="textbox" name="message" id="message2" cols="30" rows="4"
+                    placeholder="What is the airspeed velocity of an unladen swallow? (Show your work)"></textarea>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <p style="text-align: center; color:#e43c5c; font-weight: bold; font-size:large;">Now let's get some hot
+                  takes</h2>
+                <div class="col-md-6 form-group">
+                  <div class="form-check">
+                    <p>Choose any:</p>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Meats"
+                      style="opacity:0">
+                    <label class="form-check-label" for="inlineCheckbox1"
+                      style="width:200px; text-align: center;">Meats</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Veggie"
+                      style="opacity:0">
+                    <label class="form-check-label" for="inlineCheckbox2"
+                      style="width:200px; text-align: center;">Veggie</label>
+                  </div>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <div class="form-check">
+                    <p>Choose one:</p>
+                    <input class="form-check-input" type="radio" name="Radios" id="radioFlyer" value="cheese"
+                      onclick="showNothing()">
+                    <label class="radioLabel" for="radioFlyer" style="width:200px; text-align: center;">Cheese</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Radios" id="radioHead" value="noCheese"
+                      onclick="showTextBox()">
+                    <label class="radioLabel" for="radioHead" style="width:200px; text-align: center;">No Cheese</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Coke" style="opacity:0">
+                    <label class="form-check-label" for="inlineCheckbox3"
+                      style="width:200px; text-align: center;">Coke</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Pepsi"
+                      style="opacity:0">
+                    <label class="form-check-label" for="inlineCheckbox4"
+                      style="width:200px; text-align: center;">Pepsi</label>
+                  </div>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Radio2" id="radio881" value="Pineapple"
+                      onclick="showTextBox2()">
+                    <label class="radioLabel" for="radio881" style="width:200px; text-align: center;">Pineapple</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Radio2" id="radioShack" value="noMonster"
+                      onclick="showNothing2()">
+                    <label class="radioLabel" for="radioShack" style="width:200px; text-align: center;">I'm no
+                      monster</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="explainYourself">
+                <div class="form-group">
+                  <label for="message">Please explain why on earth you would choose "No Cheese":</label><br>
+                  <textarea style="width:100%" class="textbox" name="message" id="message" cols="30"
+                    rows="4"></textarea>
+                </div>
+              </div>
+              <div class="row" id="explainYourself2">
+                <div class="form-group">
+                  <label for="message">Please tell us why you're an actual monster:</label><br>
+                  <textarea style="width:100%" class="textbox" name="message" id="message2" cols="30"
+                    rows="4"></textarea>
+                </div>
+              </div>
+              <div class="text-center" id="ogSubmit">
+                <button onclick="sentTheThing1()" type="submit">Submit</button>
+                <div id="sentTheThing1"></div>
+              </div>
+              <div class="text-center" id="theresSomethingWrongWithYouSubmit" style="display: none;">
+                <button onclick="sentTheThing2()" type="submit">Submit</button>
+                <div id="sentTheThing2"></div>
+              </div>
+          </div>
+
+          <script>
+            function sentTheThing1() {
+              document.getElementById("sentTheThing1").innerText = "Submitted!";
+            }
+
+            function sentTheThing2() {
+              document.getElementById("sentTheThing2").innerText = "Submitted!";
+            }
+            function showNothing() {
+              document.getElementById('explainYourself').style.display = 'none';
+              document.getElementById('ogSubmit').style.display = 'block';
+              document.getElementById('theresSomethingWrongWithYouSubmit').style.display = 'none';
+            }
+            function showTextBox() {
+              document.getElementById('explainYourself').style.display = 'block';
+              document.getElementById('ogSubmit').style.display = 'none';
+              document.getElementById('theresSomethingWrongWithYouSubmit').style.display = 'block';
+            }
+            function showNothing2() {
+              document.getElementById('explainYourself2').style.display = 'none';
+              document.getElementById('ogSubmit').style.display = 'block';
+              document.getElementById('theresSomethingWrongWithYouSubmit').style.display = 'none';
+            }
+            function showTextBox2() {
+              document.getElementById('explainYourself2').style.display = 'block';
+              document.getElementById('ogSubmit').style.display = 'none';
+              document.getElementById('theresSomethingWrongWithYouSubmit').style.display = 'block';
+            }
+          </script>
+          </form>
+
+        </div>
+      </div>
+      </div>
+    </section>
+    <!-- End disappearingElement Section -->
+    <hr style="height: 2px; background-color: #333; border: none;">
+
+    <!-- ======= shadowDom Section ======= -->
+    <section id="shadowDomSection" class="py-5 clickEvents anchor">
+      <div class="container">
+        <div class="section-title text-center mb-4">
+          <h2>Features</h2>
+          <h3>Exploring the <span>Shadow DOM</span></h3>
+          <p>Elements below live inside a shadow root. Tagging these in Pendo can sometimes be a little tricky.</p><br>
+        </div>
+
+        <div class="row gy-4 justify-content-center">
+
+          <!-- Card 1 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-cube-alt"></i></div>
+              <h4 class="title">Simple Shadow Button</h4>
+              <p class="description">A button rendered inside a custom element with a shadow root.</p>
+              <custom-button></custom-button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-image-alt"></i></div>
+              <h4 class="title">Shadow Image Card</h4>
+              <p class="description">An image and caption within a shadow DOM element.</p>
+              <shadow-card></shadow-card>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="icon-box w-100">
+              <div class="icon"><i class="bx bx-edit-alt"></i></div>
+              <h4 class="title">Form in Shadow DOM</h4>
+              <p class="description">Inputs and buttons encapsulated in a shadow tree.</p>
+              <shadow-form></shadow-form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Shadow DOM component scripts -->
+    <script>
+      // ----- Example 1: Simple Button Component -----
+      class CustomButton extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          button {
+            background: #e43c5c;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+          }
+          button:hover { background: #d01d3f; }
+        </style>
+        <br>
+        <button id="shadowBtn">Click Inside Shadow</button>
+      `;
+          shadow.querySelector('#shadowBtn').addEventListener('click', () => {
+            alert('Button clicked inside shadow DOM!');
+          });
+        }
+      }
+      customElements.define('custom-button', CustomButton);
+
+      // ----- Example 2: Image + Text -----
+      class ShadowCard extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          .card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            text-align: center;
+          }
+          img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+          }
+          p {
+            margin: 10px 0;
+            color: #444;
+          }
+        </style>
+        <div class="card">
+          <img src="assets/img/chancla.gif" alt="Chancla">
+          <p>This image lives in the shadow DOM.</p>
+        </div>
+      `;
+        }
+      }
+      customElements.define('shadow-card', ShadowCard);
+
+      // ----- Example 3: Form inside Shadow DOM -----
+      class ShadowForm extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: 'open' });
+          shadow.innerHTML = `
+        <style>
+          form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+          input, select, button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+          }
+          button {
+            background: #0d6efd;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+          }
+          button:hover { background: #084298; }
+        </style>
+        <form id="shadowForm">
+          <input type="text" placeholder="Enter name" />
+          <select>
+            <option>Choose option</option>
+            <option>Option A</option>
+            <option>Option B</option>
+          </select>
+          <button type="button">Submit</button>
+        </form>
+      `;
+          shadow.querySelector('button').addEventListener('click', () => {
+            alert('Form inside shadow DOM submitted!');
+          });
+        }
+      }
+      customElements.define('shadow-form', ShadowForm);
+    </script>
+
+    <hr style="height: 2px; background-color: #333; border: none;">
+    <!-- ======= trackEvents Section ======= -->
+    <section id="trackEvents" class="trackEvents anchor">
+      <div class="container">
+        <div class="section-title">
+          <h2>trackEvents</h2>
+          <h3>What if there are <span>no clicks?!</span></h3>
+          <p>Sometimes you want to track things that aren't linked directly to a click.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="box">
+              <h3>How to capture the search when you hit enter?!?</h3>
+              <input type="text" id="searchField" placeholder="enter whatever you want">
+              <h5 id="result"></h5>
+              <script>
+                const input = document.querySelector('#searchField');
+
+                input.addEventListener('keydown', (event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault(); // prevent default behavior
+                    pendo.track("Search Term", { // send the track event
+                      searchTerm: document.getElementById('searchField').value,
+                      screenWidth: JSON.stringify(window.innerWidth),
+                      screenHeight: JSON.stringify(window.innerHeight)
+                    });
+                    document.getElementById("result").innerText = "Submitted!";
+                  }
+                });
+              </script>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended">
+              <h3>Which floof gets dropped in the box?</h3>
+              <div style="display: flex;">
+                <div style="flex: 33.33%; padding: 5px;">
+                  <img id="catFloof" src="assets/img/cat.png" draggable="true" ondragstart="drag(event)" height="100">
+                  <img id="dogFloof" src="assets/img/dog.png" draggable="true" ondragstart="drag(event)" height="100">
+                </div>
+              </div>
+              <br>
+              <div style="margin: auto;" id="getData" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="recommended-badge">THE BEST</span>
+              </div>
+              <script>
+                function allowDrop(even) {
+                  even.preventDefault();
+                }
+
+                function drag(even) {
+                  even.dataTransfer.setData("text", even.target.id);
+                }
+
+                function drop(even) {
+                  even.preventDefault();
+                  var fetchData = even.dataTransfer.getData("text");
+                  even.target.appendChild(document.getElementById(fetchData));
+                  pendo.track("Floof Drop", {
+                    theBestFloof: fetchData,
+                    screenWidth: JSON.stringify(window.innerWidth),
+                    screenHeight: JSON.stringify(window.innerHeight)
+                  });
+                }
+              </script>
+            </div>
+          </div>
+          <!--           <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended">
+              <span class="recommended-badge">Recommended</span>
+              <h3>Here's another dropdown</h3>
+              <h4><sup>it's very</sup>important<span> to me</span></h4>
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>This is the most important one</option>
+                <option value="1">No this one!</option>
+                <option value="2">This is the more important one</option>
+                <option value="3">How can you pick those others</option>
+                <option value="4">When I'm right here</option>
+              </select>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div> -->
+          <!--           <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>Here's another; do you like:</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               
+              <select class="form-select" aria-label="select dropdown">
+                <option selected>Flowers</option>
+                <option value="1">Fungi</option>
+                <option value="2">Metal</option>
+                <option value="3">Lace</option>
+                <option value="3">Rocks</option>
+              </select>
+              
+          </div> -->
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>How long does it take an upload to complete?</h3>
+              <!-- <h4><sup>$</sup>0<span> / month</span></h4>
+               -->
+              <div id="Progress_Status">
+                <div id="myprogressBar"></div>
+              </div>
+
+              <br>
+              <button class="btn-buy" onclick="update()">Start Upload</button>
+
+              <script>
+                function update() {
+                  var element = document.getElementById("myprogressBar");
+                  var width = 1;
+                  var randomTime = Math.floor(Math.random() * 100);
+                  console.log(randomTime)
+                  var identity = setInterval(scene, randomTime);
+                  function scene() {
+                    if (width >= 100) {
+                      clearInterval(identity);
+                      pendo.track("Upload time", {
+                        timeInMs: randomTime,
+                        screenWidth: JSON.stringify(window.innerWidth),
+                        screenHeight: JSON.stringify(window.innerHeight)
+                      });
+                    } else {
+                      width++;
+                      element.style.width = width + '%';
+                      element.innerHTML = width * 1 + '%';
+                    }
+                  };
+                }
+              </script>
+
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End trackEvents Section -->
+
+  </main>
+  <!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-clickEventProps">
+            <h3>Escalation Engineering</h3>
+            <p>
+              123 Grimace Drive <br>
+              Pendo, TS<br><br>
+              <strong>Phone:</strong> +1 123 581 3213 ext 4<br>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Answers</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Salt</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Salty Answers</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Check it out in Pendo!</h4>
+            <p>This is the single page site attached to:<br>
+              sub 5046634419191808 (TechSuccess_Demo)<br>
+              app 5442093541818368 (SinglePageApp)</p>
+            <div>
+              <a href="https://app.pendo.io/s/5046634419191808/" class="footer-btn">Take me there!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container d-md-flex py-4">
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Escalation Engineering</span></strong>. All Rights Revoked
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    // Source: http://stackoverflow.com/questions/30734552/change-url-while-scrolling
+    // stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+    function isElementInViewport(el) {
+      if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+      }
+      var rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+      );
+    }
+    // listen for the scroll event
+    $(document).on("scroll", function () {
+      // check if the anchor elements are visible
+      $(".anchor").each(function (idx, el) {
+        if (isElementInViewport(el)) {
+          // update the URL hash
+          if (window.history.pushState) {
+            var urlHash = "#" + $(el).attr("id");
+            window.history.pushState(null, null, urlHash);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>
