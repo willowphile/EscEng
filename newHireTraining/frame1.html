@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EE Training Template</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Nunito:300,400,600,700|Poppins:300,400,500,600,700"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS -->
+    <link href="assets/css/stylesMPA.css" rel="stylesheet" />
+
+    <!-- Pendo Snippet File -->
+    <script src="assets/js/pendoSnippet.js"></script>
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="btn-container">
+        <button class="btn btn-primary text-white rounded-pill py-3">Clicky</button>
+    </div>
+
+    <!-- Vendor JS -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <!-- Template Main JS -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // check to see if pendo exists AND pendo.isReady is a function.
+        // if true, set pendo.excludeAllText to true, otherwise retry after a delay.
+        function waitForPendoReady(callback, retryInterval = 500, maxAttempts = 20) {
+            let attempts = 0;
+            const check = () => {
+                attempts++;
+                // check to see if pendo exists AND pendo.isReady is a function
+                if (window.pendo && typeof pendo.isReady === "function") {
+                    // Now check if pendo is ready
+                    if (pendo.isReady()) {
+                        callback();
+                        return;
+                    }
+                }
+                // give up all hope after max attempts
+                if (attempts >= maxAttempts) {
+                    console.warn("[EAT] Pendo is not ready after max attempts.");
+                    return;
+                }
+                setTimeout(check, retryInterval);
+            };
+            check();
+        }
+
+        // once we're sure pendo is ready, set excludeAllText to true :tada:
+        waitForPendoReady(() => {
+            pendo.excludeAllText = true;
+            console.log("[EAT] Pendo is ready, excludeAllText set to true.");
+        });
+    </script>
+</body>
+
+</html>

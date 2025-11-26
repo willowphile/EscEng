@@ -45,22 +45,33 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link" href="index.html">Home</a></li>
-                    <li><a class="nav-link" href="identify.html">Identify</a></li>
-                    <li class="dropdown nav-link">
-                        <a href="#"><span>Feature Tagging</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="basic-tagging.html">Basic Tagging</a></li>
-                            <li><a href="advanced-tagging.html">Advanced Tagging</a></li>
-                            <li><a href="custom-html.html">Custom HTML</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link" href="track-events.html">Track Events</a></li>
-                    <li><a class="nav-link" href="other-pages.html">Other Pages</a></li>
+                    <li><a class="nav-link" href="../index.html">Portal</a></li>
+                    <li><a class="nav-link" href="index.html">Feature Tagging</a></li>
+                    <li><a class="nav-link" href="pageTagging.html">Page Tagging</a></li>
+                    <li><a class="nav-link active" href="frames.html">Frames Tagging</a></li>
+                    <li><a class="nav-link login" href="index.html">
+                            <span class="nav-text">
+                                <div id="visitorIdHeader"></div>
+                                <div id="visitorInstructions"></div>
+                            </span>
+                        </a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
         </div>
+        <script type="text/javascript">
+            setInterval(function () {
+                let currentVisitor = localStorage.getItem('visitor');
+                if (currentVisitor = "" || currentVisitor == null) {
+                    document.getElementById("visitorInstructions").innerText = "Please log in below"
+                } else {
+                    document.getElementById("visitorIdHeader").innerText = localStorage.getItem('visitor');
+                    document.getElementById("visitorInstructions").innerText = "Click to change visitor"
+                    document.getElementById("visitorInstructions").style.fontSize = "x-small";
+                };
+            },
+                1000);
+        </script>
     </header>
     <!-- End Header -->
 

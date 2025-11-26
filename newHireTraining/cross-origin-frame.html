@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iframe Widget</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            margin: 0;
+            /* padding: 2rem; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #ffffff;
+            color: #2575fc;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0e0ff;
+        }
+    </style>
+</head>
+
+<body>
+    <p>This frame is a little different.</p><p>Can you tell where it lives? Can you tag in it?</p>
+                   
+    <div class="container">
+        <script>
+            function dummyClick() {
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '50%';
+                modal.style.left = '50%';
+                modal.style.transform = 'translate(-50%, -50%)';
+                modal.style.background = 'url("./assets/img/youDontOwnMe.gif") center / cover no-repeat';
+                modal.style.backgroundSize = "contain";
+                modal.style.width = '280px';
+                modal.style.height = '200px';
+                modal.style.backgroundColor = '#fff';
+                modal.style.padding = '20px';
+                modal.style.borderRadius = '8px';
+                modal.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+                modal.style.textAlign = 'center';
+                modal.style.color = '#6a11cb';
+                modal.innerHTML = `<button class="close-btn" onclick="this.parentElement.remove()">✕</button>
+`;
+                const btn = modal.querySelector(".close-btn");
+                btn.style.position = "absolute";
+                btn.style.top = "8px";
+                btn.style.right = "8px";
+                btn.style.border = "none";
+                btn.style.background = "rgba(0,0,0,0.4)";
+                btn.style.color = "white";
+                btn.style.fontSize = "20px";
+                btn.style.width = "32px";
+                btn.style.height = "32px";
+                btn.style.borderRadius = "50%";
+                btn.style.cursor = "pointer";
+                btn.style.display = "flex";
+                btn.style.alignItems = "center";
+                btn.style.justifyContent = "center";
+                btn.style.fontWeight = "bold";
+
+                document.body.appendChild(modal);
+            }
+        </script>
+        <button onclick="dummyClick()">Click Me!</button>
+    </div>
+</body>
+
+</html>
